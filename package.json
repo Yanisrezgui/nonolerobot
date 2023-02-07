@@ -1,0 +1,15 @@
+{
+  "name": "pixijs-app",
+  "version": "1.0.0",
+  "description": "A Pixi.js application in a Docker container",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "pixi.js": "^5.3.12"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
