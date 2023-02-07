@@ -11,9 +11,43 @@ body {
 .accueil-container {
   text-align: center;
   color: white;
+  margin-top: 100px;
 }
 .accueil-container h1 {
   font-family: "Robot 9000", sans-serif;
+  font-size: 72px;
+  color: #F6F6F6;
+}
+.accueil-container .hook {
+  color: #343434;
+  margin: 0 5px 0 20px;
+}
+.accueil-container .slash {
+  color: #006452;
+  margin-right: 10px;
+}
+.accueil-container .subtitle {
+  font-family: "Roboto", sans-serif;
+  color: rgba(255, 255, 255, 0.44);
+  font-size: 18px;
+}
+
+.buttons-nav {
+  margin-top: 5%;
+}
+.buttons-nav a {
+  text-decoration: none;
+  color: #F6F6F6;
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  padding: 12px 24px;
+  background-color: #006452;
+  border-radius: 5px;
+  margin: 0 10px;
+  transition: all 0.3s ease-in-out;
+}
+.buttons-nav a:hover {
+  background-color: rgba(0, 100, 82, 0.26);
 }
 
 /*# sourceMappingURL=style.css.map */
