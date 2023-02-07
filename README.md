@@ -33,7 +33,7 @@ http://localhost:3333
 
 ## Collaborators
 
-#### LP2 CIASIE
+LP2 CIASIE - IUT Nancy-Charlemagne 2022/2023
 
 * JUND Damien
 * KUNTZ Alban
