@@ -1,26 +1,36 @@
 version: '3.9'
+
 services:
-  nonolerobot:
-    image: nonolerobot
-    build:
-      context: .
-      dockerfile: ./Dockerfile
+  nodejs:
+    image: node:alpine
+    command: npm run watch
+    working_dir: /usr/src/app
     ports:
-      - 3000:3000
+      - 3333:3000
+    volumes:
+      - ./app:/usr/src/app
+    networks:
+      - nono_network
+    links:
+      - mariadb
     depends_on:
       - mariadb
 
   mariadb:
-      container_name: db_nono
-      image: mariadb:latest
-      restart: on-failure
-      ports:
-        - 3306:3306
-      environment:
-        MARIADB_DATABASE: ${MARIADB_DATABASE}
-        MARIADB_ROOT_USER: ${MARIADB_ROOT_USER}
-        MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
-        MARIADB_USER: ${MARIADB_USER}
-        MARIADB_PASSWORD: ${MARIADB_PASSWORD}
-      volumes:
-        - ./mariadb:/var/lib/mysql
+    image: mariadb
+    volumes:
+      - ./database:/var/lib/mysql
+    ports:
+      - 3306:3306
+    networks:
+      - nono_network
+    environment:
+      - MARIADB_DATABASE=NonolerobotDB
+      - MARIADB_ROOT_USER=root
+      - MARIADB_ROOT_PASSWORD=root
+      - MARIADB_USER=user
+      - MARIADB_PASSWORD=root
+
+networks:
+  nono_network:
+    driver: bridge

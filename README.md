@@ -1,15 +1,42 @@
 # NonoLeRobot
 
-Set up your environment variables in file **.env**
+## Requirements
 
-Build the Dockerfile in first
-`
-docker build .
-`
+#### Windows
 
-Run the docker-compose.yml with the following command:
-`
-docker compose up
-`
+* WSL 2
+* Docker
 
-Go to : [http://localhost](http://localhost)
+## Development
+
+Install dependencies
+
+```
+$ make build
+```
+
+Run the app
+
+```
+$ make run
+```
+
+Shut down the app
+
+```
+$ make stop
+```
+
+## Link
+
+http://localhost:3333
+
+## Collaborators
+
+LP2 CIASIE - IUT Nancy-Charlemagne 2022/2023
+
+* JUND Damien
+* KUNTZ Alban
+* REZGUI Yanis
+* TURLAN Guillaume
+* WELFRINGER Damien
