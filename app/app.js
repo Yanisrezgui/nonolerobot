@@ -4,11 +4,13 @@ const helmet = require("helmet");
 
 const indexRouter = require('./routes/index');
 
+
 const app = express();
 
 const env = process.env.NODE_ENV;
 
 app.use(helmet());
+app.use(express.static('./app/public'))
 
 if (env === "development")
     app.use(logger('dev'));

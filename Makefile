@@ -1,10 +1,16 @@
 build:
 	@echo "Installing npm dependencies..."
-	@cd ./app && npm install
+	@npm install
+	@docker build .
 
 run:
 	@echo "Running app..."
 	@docker compose up -d
+	@echo "App running on : http://localhost:3333"
+
+run log:
+	@echo "Running app with logs..."
+	@docker compose up
 	@echo "App running on : http://localhost:3333"
 
 stop:

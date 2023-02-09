@@ -1,10 +1,18 @@
 const app = require('../app.js');
 const debug = require('debug')('api:server');
 const http = require('http');
-
 const port = normalizePort(process.env.PORT || '3000');
-app.set('port', port);
 
+app.set('port', port);
+app.use(function (req, res, next) {
+  res.setHeader(
+    "Content-Security-Policy",
+    "default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://www.google.com"
+  );
+
+  next();
+});
+ 
 const server = http.createServer(app);
 
 server.listen(port);
