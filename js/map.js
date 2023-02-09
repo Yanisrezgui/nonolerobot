@@ -50,9 +50,36 @@ app.ticker.add(delta => {
 });
 
 function loop(delta) {
-    robot.y += 1;
-    robot.x -= 1;
-    // on verifie que le robot reste sur la carte
+    let minDistance = Number.MAX_VALUE;
+    let closestApple;
+    
+    // trouver la pomme la plus proche
+    for (let i = 0; i < apples.length; i++) {
+        let distance = distanceBetween(robot, apples[i]);
+        if (distance < minDistance) {
+            minDistance = distance;
+            closestApple = apples[i];
+        }
+    }
+    
+    // se diriger vers la pomme la plus proche
+    if (closestApple) {
+        let angle = angleBetween(robot, closestApple);
+        robot.y += Math.sin(angle) * 5;
+        robot.x += Math.cos(angle) * 5;
+    }
+    
+    // éviter les arbres
+    for (let i = 0; i < trees.length; i++) {
+        let distance = distanceBetween(robot, trees[i]);
+        if (distance < 50) {
+            let angle = angleBetween(robot, trees[i]);
+            robot.y -= Math.sin(angle) * 5;
+            robot.x -= Math.cos(angle) * 5;
+        }
+    }
+    
+    // s'assurer que le robot reste sur la carte
     if (robot.x + robot.width / 2 > app.screen.width + 50) {
         robot.x = 10;
     }
@@ -66,6 +93,19 @@ function loop(delta) {
         robot.y = window.innerHeight;
     }
 }
+
+// calculer la distance entre deux objets
+function distanceBetween(sprite1, sprite2) {
+    let dx = sprite1.x - sprite2.x;
+    let dy = sprite1.y - sprite2.y;
+    return Math.sqrt(dx * dx + dy * dy);
+}
+
+// calculer l'angle entre deux objets
+function angleBetween(sprite1, sprite2) {
+    return Math.atan2(sprite2.y - sprite1.y, sprite2.x - sprite1.x);
+}
+
 
 // Ajoutez une fonction pour vérifier la collision entre le robot et les pommes
 function checkCollision() {
