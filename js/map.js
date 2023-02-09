@@ -65,8 +65,8 @@ function loop(delta) {
     // se diriger vers la pomme la plus proche
     if (closestApple) {
         let angle = angleBetween(robot, closestApple);
-        robot.y += Math.sin(angle) * 5;
-        robot.x += Math.cos(angle) * 5;
+        robot.y += Math.sin(angle) * 2;
+        robot.x += Math.cos(angle) * 2;
     }
     
     // éviter les arbres
