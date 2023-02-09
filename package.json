@@ -2,10 +2,10 @@
   "name": "nonolerobot",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "./app/config/server.js",
   "scripts": {
-    "start": "node ./config/server.js",
-    "watch": "nodemon ./config/server.js"
+    "start": "node ./app/config/server.js",
+    "watch": "nodemon ./app/config/server.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,7 @@
     "mariadb": "^3.0.2",
     "morgan": "~1.9.1",
     "nodemon": "^2.0.20",
+    "pixi-shim": "^2.4.0",
     "pixi.js": "^7.1.2"
   }
 }

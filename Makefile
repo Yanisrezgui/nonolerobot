@@ -1,6 +1,7 @@
 build:
 	@echo "Installing npm dependencies..."
-	@cd ./app && npm install
+	@npm install
+	@docker build .
 
 run:
 	@echo "Running app..."
