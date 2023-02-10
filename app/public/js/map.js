@@ -1,5 +1,3 @@
-let map = document.getElementById("map");
-
 app = new PIXI.Application({
     width: 1000,
     height: 700,
@@ -8,7 +6,8 @@ app = new PIXI.Application({
     resolution: 1,
 });
 
-map.appendChild(app.view);
+app.renderer.view.style.position = 'absolute'
+document.body.appendChild(app.view);
 
 const herbe = new PIXI.Sprite.from('../images/herbe.png')
 app.stage.addChild(herbe)
