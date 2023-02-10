@@ -1,0 +1,34 @@
+.accueil-container {
+    text-align: center;
+    color: white;
+    margin-top: 100px;
+
+    h1 {
+        font-size: 72px;
+    }
+
+    .subtitle {
+        font-family: 'Roboto', sans-serif;
+        color: rgba(255, 255, 255, 0.44);
+        font-size: 18px;
+    }
+}
+
+.buttons-nav {
+    margin-top: 5%;
+
+    a {
+        text-decoration: none;
+        color: $white;
+        font-family: 'Roboto', sans-serif;
+        font-size: 18px;
+        padding: 12px 24px;
+        background-color: $second-color;
+        border-radius: 5px;
+        margin: 0 10px;
+        transition: all 0.3s ease-in-out;
+    }
+    a:hover {
+        background-color: $third-color;
+    }
+}
