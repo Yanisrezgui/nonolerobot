@@ -35,19 +35,19 @@ nav {
     display:flex;
     margin-top: 100px;
 
-    img {
-        margin-left: 100px;
+    #map {
+        margin-left:100px ;
     }
     .settings {
-        margin: 0 auto;
+        margin: 25px auto;
         h2 {
             font-family: 'Roboto', sans-serif;
-            font-size: 40px;
+            font-size: 32px;
             color: $white;
             border-top: 1px solid $white;
             border-bottom: 1px solid $white;
             padding: 20px;
-            width: 500px;
+            width: 400px;
             text-align: center;
         }
     

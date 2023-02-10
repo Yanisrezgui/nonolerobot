@@ -1,18 +1,19 @@
+let map = document.getElementById("map");
+
 app = new PIXI.Application({
-    width: window.innerWidth * 2 / 3,
-    height: window.innerHeight,
+    width: 1000,
+    height: 700,
     antialias: true,
     transparent: false,
     resolution: 1,
 });
 
-app.renderer.view.style.position = 'absolute'
-document.body.appendChild(app.view);
+map.appendChild(app.view);
 
 const herbe = new PIXI.Sprite.from('../images/herbe.png')
 app.stage.addChild(herbe)
 
-herbe.width = window.innerWidth * 2 / 3
+herbe.width = window.innerWidth
 herbe.height = window.innerHeight
 herbe.opacity = 0.5
 

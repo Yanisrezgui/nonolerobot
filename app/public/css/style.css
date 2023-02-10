@@ -89,20 +89,20 @@ nav ul li a:hover {
   display: flex;
   margin-top: 100px;
 }
-.undergame-container img {
+.undergame-container #map {
   margin-left: 100px;
 }
 .undergame-container .settings {
-  margin: 0 auto;
+  margin: 25px auto;
 }
 .undergame-container .settings h2 {
   font-family: "Roboto", sans-serif;
-  font-size: 40px;
+  font-size: 32px;
   color: #F6F6F6;
   border-top: 1px solid #F6F6F6;
   border-bottom: 1px solid #F6F6F6;
   padding: 20px;
-  width: 500px;
+  width: 400px;
   text-align: center;
 }
 .undergame-container .settings h3 {
