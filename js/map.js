@@ -47,39 +47,83 @@ setInterval(() => {
 app.ticker.add(delta => {
     loop(delta);
     checkCollision();
+    checkDetection();
 });
 
+// Initialise la direction actuelle du robot
+let currentDirection = {x: -1, y: 1};
+
+// Initialiser le cercle de détection
+const detectionRadius = 50;
+const detectionCircle = new PIXI.Graphics();
+detectionCircle.x = robot.x;
+detectionCircle.y = robot.y;
+detectionCircle.beginFill(0xFFFFFF, 0.2);
+detectionCircle.drawCircle(0, 0, detectionRadius);
+detectionCircle.endFill();
+app.stage.addChild(detectionCircle);
+
 function loop(delta) {
-    let minDistance = Number.MAX_VALUE;
-    let closestApple;
-    
-    // trouver la pomme la plus proche
-    for (let i = 0; i < apples.length; i++) {
-        let distance = distanceBetween(robot, apples[i]);
-        if (distance < minDistance) {
-            minDistance = distance;
-            closestApple = apples[i];
-        }
-    }
-    
-    // se diriger vers la pomme la plus proche
-    if (closestApple) {
-        let angle = angleBetween(robot, closestApple);
-        robot.y += Math.sin(angle) * 2;
-        robot.x += Math.cos(angle) * 2;
-    }
-    
-    // éviter les arbres
+    let speedFactor = 2;
+
+    // On déplace le robot dans la direction actuelle
+    robot.x += currentDirection.x * speedFactor;
+    robot.y += currentDirection.y * speedFactor;
+
+    let detectedApples = [];
+
+    // On vérifie si un arbre se trouve dans la zone de détection
+
     for (let i = 0; i < trees.length; i++) {
-        let distance = distanceBetween(robot, trees[i]);
-        if (distance < 50) {
-            let angle = angleBetween(robot, trees[i]);
-            robot.y -= Math.sin(angle) * 5;
-            robot.x -= Math.cos(angle) * 5;
+        const object = trees[i];
+        // Vérifier si c'est une pomme plutôt qu'un arbre
+        if (object.type === "apple") {
+            let distance = calculateDistance(robot, object);
+            if (distance < detectionRadius) {
+                detectedApples.push(object);
+            }
+        } else {
+            let distance = calculateDistance(robot, object);
+            if (distance < detectionRadius) {
+                // Si un arbre se trouve à moins de 'detectionRadius' pixels du robot, on fait pivoter le robot dans la direction opposée
+                let angle = angleBetween(robot, object);
+                currentDirection.y -= Math.sin(angle) * 2;
+                currentDirection.x -= Math.cos(angle) * 2;
+            }
+        }
+    }
+
+    for (let i = 0; i < detectedApples.length; i++) {
+        const apple = detectedApples[i];
+        let angle = angleBetween(robot, apple);
+        currentDirection.y += Math.sin(angle) * 2;
+        currentDirection.x += Math.cos(angle) * 2;
+    }
+
+
+    // On vérifie si une ou plusieurs pomme(s) se trouve(nt) dans la zone de détection
+    for (let i = 0; i < apples.length; i++) {
+        const apple = apples[i];
+        let distance = calculateDistance(robot, apple);
+        if (distance < detectionRadius) {
+            detectedApples.push(apple);
         }
     }
     
-    // s'assurer que le robot reste sur la carte
+    for (let i = 0; i < detectedApples.length; i++) {
+        const apple = detectedApples[i];
+        let angle = angleBetween(robot, apple);
+        currentDirection.y += Math.sin(angle) * 1;
+        currentDirection.x += Math.cos(angle) * 1;
+    }
+    
+
+    // Normaliser la direction actuelle pour maintenir une vitesse constante
+    let directionLength = Math.sqrt(currentDirection.x * currentDirection.x + currentDirection.y * currentDirection.y);
+    currentDirection.x /= directionLength;
+    currentDirection.y /= directionLength;
+
+    // On verifie que le robot reste sur la carte
     if (robot.x + robot.width / 2 > app.screen.width + 50) {
         robot.x = 10;
     }
@@ -92,20 +136,23 @@ function loop(delta) {
     if (robot.y - robot.height / 2 < -30) {
         robot.y = window.innerHeight;
     }
+
+    // Mettre à jour les coordonnées du cercle de détection
+    detectionCircle.x = robot.x;
+    detectionCircle.y = robot.y;
 }
 
-// calculer la distance entre deux objets
-function distanceBetween(sprite1, sprite2) {
-    let dx = sprite1.x - sprite2.x;
-    let dy = sprite1.y - sprite2.y;
-    return Math.sqrt(dx * dx + dy * dy);
+// Calcule la distance entre deux objets
+function calculateDistance(obj1, obj2) {
+    let xDiff = obj1.x - obj2.x;
+    let yDiff = obj1.y - obj2.y;
+    return Math.sqrt(xDiff * xDiff + yDiff * yDiff);
 }
 
 // calculer l'angle entre deux objets
 function angleBetween(sprite1, sprite2) {
     return Math.atan2(sprite2.y - sprite1.y, sprite2.x - sprite1.x);
 }
-
 
 // Ajoutez une fonction pour vérifier la collision entre le robot et les pommes
 function checkCollision() {
@@ -116,6 +163,18 @@ function checkCollision() {
             app.stage.removeChild(apple);
             apples.splice(i, 1);
             appleCounter--
+        }
+    }
+}
+
+function checkDetection() {
+    detectionCircle.x = robot.x + robot.width / 2;
+    detectionCircle.y = robot.y + robot.height / 2;
+    for (let i = 0; i < trees.length; i++) {
+        let tree = trees[i];
+        let distance = Math.sqrt(Math.pow(tree.x - detectionCircle.x, 2) + Math.pow(tree.y - detectionCircle.y, 2));
+        if (distance < detectionRadius + tree.width / 2) {
+            console.log("Il y a un arbre devant le robot !");
         }
     }
 }
