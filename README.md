@@ -4,8 +4,7 @@
 
 #### Windows
 
-* WSL 2
-* Docker
+* npm
 
 ## Development
 
@@ -15,21 +14,7 @@ Install dependencies
 $ make build
 ```
 
-Run the app
-
-```
-$ make run
-```
-
-Shut down the app
-
-```
-$ make stop
-```
-
-## Link
-
-http://localhost:3333
+Start a live server on your PC
 
 ## Collaborators
 
