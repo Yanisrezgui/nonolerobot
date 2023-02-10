@@ -9,3 +9,16 @@
 body {
     background-color: #111111 ;
 }
+
+h1 {
+    font-family: 'Robot 9000', sans-serif;
+    color: $white;
+}
+.hook {
+    color: $hook-color;
+    margin: 0 5px 0 20px
+}
+.slash {
+    color: $second-color;
+    margin-right: 10px;
+}
