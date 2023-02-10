@@ -1,30 +1,16 @@
 {
-  "name": "nonolerobot",
+  "name": "pixijs-app",
   "version": "1.0.0",
-  "description": "",
-  "main": "./app/config/server.js",
+  "description": "A Pixi.js application in a Docker container",
+  "main": "index.js",
   "scripts": {
-    "start": "node ./app/config/server.js",
-    "watch": "nodemon ./app/config/server.js"
+    "start": "node index.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Alban-Ktz/NonoLeRobot.git"
+  "dependencies": {
+    "@pixi/graphics-extras": "^7.1.2",
+    "pixi.js": "^5.3.12"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Alban-Ktz/NonoLeRobot/issues"
-  },
-  "homepage": "https://github.com/Alban-Ktz/NonoLeRobot#readme",
-  "dependencies": {
-    "express": "^4.18.2",
-    "helmet": "6.0.1",
-    "mariadb": "^3.0.2",
-    "morgan": "~1.9.1",
-    "nodemon": "^2.0.20",
-    "pixi-shim": "^2.4.0",
-    "pixi.js": "^7.1.2"
-  }
+  "license": "ISC"
 }
