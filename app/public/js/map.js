@@ -1,53 +1,76 @@
-app = new PIXI.Application({
-    width: 1000,
-    height: 700,
-    antialias: true,
-    transparent: false,
-    resolution: 1,
-});
-
-app.renderer.view.style.position = 'absolute'
-document.body.appendChild(app.view);
-
-const herbe = new PIXI.Sprite.from('../images/herbe.png')
-app.stage.addChild(herbe)
-
-herbe.width = window.innerWidth
-herbe.height = window.innerHeight
-herbe.opacity = 0.5
-
-const robot = new PIXI.Sprite.from('../images/robot.png')
-app.stage.addChild(robot)
-robot.width = 30
-robot.height = 30
-robot.position.set(200, 200)
-robot.anchor.set(0.5)
-
-// Ajoutez un tableau pour les pommes
-const apples = [];
+app = undefined;
+robot = new PIXI.Sprite.from('../images/game/robot.png');
 
 // Ajoutez un compteur pour les pommes
 let appleCounter = 0;
+// Ajoutez un tableau pour les pommes
+const apples = [];
 
-// Ajoutez un intervalle pour ajouter une pomme toutes les 2 secondes
-setInterval(() => {
-    if (appleCounter < 20) {
-        const apple = new PIXI.Sprite.from('../images/pomme.png');
-        apple.width = 20;
-        apple.height = 20;
-        apple.position.set(Math.random() * app.screen.width, Math.random() * app.screen.height);
-        apple.anchor.set(0.5);
-        apples.push(apple);
-        app.stage.addChild(apple);
-        appleCounter++;
-        console.log(appleCounter)
+const trees = [];    
+
+const initApp = () => {
+    app = new PIXI.Application({
+        width: 1000,
+        height: 700,
+        antialias: true,
+        transparent: false,
+        resolution: 1,
+    });
+
+    app.renderer.view.style.position = 'absolute'
+    document.getElementById("map").appendChild(app.view);
+
+    const herbe = new PIXI.Sprite.from('../images/game/herbe.png')
+    app.stage.addChild(herbe)
+    
+    herbe.width = window.innerWidth
+    herbe.height = window.innerHeight
+    herbe.opacity = 0.5
+};
+
+
+const initRobot = () => {
+    app.stage.addChild(robot)
+    robot.width = 30
+    robot.height = 30
+    robot.position.set(200, 200)
+    robot.anchor.set(0.5)
+}
+
+const initFruits = () => {
+    // Ajoutez un intervalle pour ajouter une pomme toutes les 1 secondes
+    setInterval(() => {
+        if (appleCounter < 20) {
+            const apple = new PIXI.Sprite.from('../images/game/pomme.png');
+            apple.width = 20;
+            apple.height = 20;
+            apple.position.set(Math.random() * app.screen.width, Math.random() * app.screen.height);
+            apple.anchor.set(0.5);
+            apples.push(apple);
+            app.stage.addChild(apple);
+            appleCounter++;
+        }
+    }, 1000);
+}
+
+const initTrees = () => {
+    // Initialiser les 20 arbres
+    for (let i = 0; i < 20; i++) {
+        const tree = new PIXI.Sprite.from('../images/game/arbre.png');
+        app.stage.addChild(tree);
+        tree.width = 30;
+        tree.height = 30;
+        tree.position.set(Math.random() * app.screen.width, Math.random() * app.screen.height);
+        trees.push(tree);
     }
-}, 500);
+}
 
-app.ticker.add(delta => {
-    loop(delta);
-    checkCollision();
-});
+const startGame = () => {
+    app.ticker.add(delta => {
+        loop(delta);
+        checkCollision();
+    });
+}
 
 function loop(delta) {
     let minDistance = Number.MAX_VALUE;
@@ -106,7 +129,6 @@ function angleBetween(sprite1, sprite2) {
     return Math.atan2(sprite2.y - sprite1.y, sprite2.x - sprite1.x);
 }
 
-
 // Ajoutez une fonction pour vérifier la collision entre le robot et les pommes
 function checkCollision() {
     for (let i = 0; i < apples.length; i++) {
@@ -120,14 +142,37 @@ function checkCollision() {
     }
 }
 
-const trees = [];
+const initAll = () => {
+    initApp();
+    initRobot();
+    initTrees();
+    initFruits();
 
-// Initialiser les 20 arbres
-for (let i = 0; i < 20; i++) {
-    const tree = new PIXI.Sprite.from('../images/arbre.png');
-    app.stage.addChild(tree);
-    tree.width = 30;
-    tree.height = 30;
-    tree.position.set(Math.random() * app.screen.width, Math.random() * app.screen.height);
-    trees.push(tree);
+    startGame();    
 }
+
+const appReset = () => {
+    app.destroy({
+        children: true,
+        texture: true,
+        baseTexture: true
+    });
+
+    initAll();
+}
+
+addEventListener("DOMContentLoaded", () => {
+    initAll();
+})
+
+document.getElementById("play-button").addEventListener("click", () => {
+    let img = document.getElementById("img-play-pause").src;
+
+    if (img == "http://localhost:5500/app/public/images/options/play.png") {
+        document.getElementById("img-play-pause").src = "../images/options/pause.png";
+        appReset();
+    } else {
+        document.getElementById("img-play-pause").src = "../images/options/play.png";
+        app.stop();
+    }
+})

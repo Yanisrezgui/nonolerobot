@@ -86,14 +86,20 @@ nav ul li a:hover {
 }
 
 .undergame-container {
-  display: flex;
-  margin-top: 100px;
+  margin: 3em 25px;
 }
-.undergame-container #map {
-  margin-left: 100px;
+.undergame-container .game-option {
+  position: absolute;
+  z-index: 1;
+}
+.undergame-container .game-option div > img {
+  width: 50px;
 }
 .undergame-container .settings {
-  margin: 25px auto;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 20px;
 }
 .undergame-container .settings h2 {
   font-family: "Roboto", sans-serif;

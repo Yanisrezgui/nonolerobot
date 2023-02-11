@@ -32,14 +32,23 @@ nav {
 
 
 .undergame-container {
-    display:flex;
-    margin-top: 100px;
+    margin: 3em 25px;
 
-    #map {
-        margin-left:100px ;
+    .game-option {
+        position: absolute;
+        z-index: 1;
+
+        div>img {
+            width: 50px;
+        }
     }
+
     .settings {
-        margin: 25px auto;
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        right: 20px;
+
         h2 {
             font-family: 'Roboto', sans-serif;
             font-size: 32px;
