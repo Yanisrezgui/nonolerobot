@@ -4,9 +4,9 @@ robot = new PIXI.Sprite.from('../images/game/robot.png');
 // Ajoutez un compteur pour les pommes
 let appleCounter = 0;
 // Ajoutez un tableau pour les pommes
-const apples = [];
-
-const trees = [];    
+let apples = [];
+// Ajoutez un tableau pour les arbres
+let trees = [];    
 
 const initApp = () => {
     app = new PIXI.Application({
@@ -39,8 +39,14 @@ const initRobot = () => {
 
 const initFruits = () => {
     // Ajoutez un intervalle pour ajouter une pomme toutes les 1 secondes
-    setInterval(() => {
-        if (appleCounter < 20) {
+    const fruitsInterval = setInterval(fruit, 1000);
+    console.log(fruitsInterval)
+
+    function fruit() {
+        if (appleCounter == -1) {
+            appleCounter++;
+            clearInterval(fruitsInterval);
+        } else if (appleCounter < 20) {
             const apple = new PIXI.Sprite.from('../images/game/pomme.png');
             apple.width = 20;
             apple.height = 20;
@@ -50,7 +56,7 @@ const initFruits = () => {
             app.stage.addChild(apple);
             appleCounter++;
         }
-    }, 1000);
+    }
 }
 
 const initTrees = () => {
@@ -154,9 +160,13 @@ const initAll = () => {
 const appReset = () => {
     app.destroy({
         children: true,
-        texture: true,
-        baseTexture: true
+        texture: false,
+        baseTexture: false
     });
+
+    trees = [];
+    apples = [];
+    appleCounter = -1;
 
     initAll();
 }
