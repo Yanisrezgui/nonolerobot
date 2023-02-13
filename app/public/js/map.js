@@ -10,10 +10,10 @@ let apples = [];
 // Ajoutez un tableau pour les arbres
 let trees = [];
 
+const detectionRadius = 50;
+
 // Initialise la direction actuelle du robot
 let currentDirection = { x: -1, y: 1 };
-
-const detectionCircle = new PIXI.Graphics();
 
 const initApp = () => {
     app = new PIXI.Application({
@@ -79,7 +79,8 @@ const initTrees = () => {
 
 const initDetectionCircle = () => {
     // Initialiser le cercle de détection
-    const detectionRadius = 50;
+    const detectionCircle = new PIXI.Graphics();
+
     detectionCircle.x = robot.x;
     detectionCircle.y = robot.y;
     detectionCircle.beginFill(0xFFFFFF, 0.2);
@@ -87,18 +88,18 @@ const initDetectionCircle = () => {
     detectionCircle.endFill();
     app.stage.addChild(detectionCircle);
 
-    return detectionRadius
+    return detectionCircle;
 }
 
 const startGame = () => {
     app.ticker.add(delta => {
-        loop(delta);
+        loop(detectionCircle);
         checkCollision();
-        checkDetection(detectionRadius);
+        checkDetection(detectionCircle);
     });
 }
 
-const loop = () => {
+const loop = (detectionCircle) => {
     let speedFactor = 2;
 
     // On déplace le robot dans la direction actuelle
@@ -202,7 +203,7 @@ const checkCollision = () => {
     }
 }
 
-const checkDetection = () => {
+const checkDetection = (detectionCircle) => {
     detectionCircle.x = robot.x + robot.width / 2;
     detectionCircle.y = robot.y + robot.height / 2;
     for (let i = 0; i < trees.length; i++) {
@@ -219,9 +220,9 @@ const initAll = () => {
     initRobot();
     initTrees();
     initFruits();
-    detectionRadius = initDetectionCircle();
+    detectionCircle = initDetectionCircle();
 
-    startGame(detectionRadius);
+    startGame(detectionCircle);
 }
 
 const appReset = () => {
