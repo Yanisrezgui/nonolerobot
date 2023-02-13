@@ -1,6 +1,8 @@
 app = undefined;
 robot = new PIXI.Sprite.from('../images/game/robot.png');
 
+let play = true;
+
 // Ajoutez un compteur pour les pommes
 let appleCounter = 0;
 // Ajoutez un tableau pour les pommes
@@ -241,13 +243,13 @@ addEventListener("DOMContentLoaded", () => {
 })
 
 document.getElementById("play-button").addEventListener("click", () => {
-    let img = document.getElementById("img-play-pause").src;
-
-    if (img == "http://localhost:5500/app/public/images/options/play.png") {
-        document.getElementById("img-play-pause").src = "../images/options/pause.png";
-        appReset();
-    } else {
+    if (play) {
         document.getElementById("img-play-pause").src = "../images/options/play.png";
         app.stop();
+    } else {
+        document.getElementById("img-play-pause").src = "../images/options/pause.png";
+        appReset();
     }
+
+    play = !play;
 })
