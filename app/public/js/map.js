@@ -6,17 +6,17 @@ let appleCounter = 0;
 // Ajoutez un tableau pour les pommes
 let apples = [];
 // Ajoutez un tableau pour les arbres
-let trees = [];    
+let trees = [];
 
 // Initialise la direction actuelle du robot
-let currentDirection = {x: -1, y: 1};
+let currentDirection = { x: -1, y: 1 };
 
 const detectionCircle = new PIXI.Graphics();
 
 const initApp = () => {
     app = new PIXI.Application({
-        width: 1000,
-        height: 700,
+        width: window.innerWidth * 2 / 3,
+        height: window.innerHeight,
         antialias: true,
         transparent: false,
         resolution: 1,
@@ -27,7 +27,7 @@ const initApp = () => {
 
     const herbe = new PIXI.Sprite.from('../images/game/herbe.png')
     app.stage.addChild(herbe)
-    
+
     herbe.width = window.innerWidth
     herbe.height = window.innerHeight
     herbe.opacity = 0.5
@@ -39,7 +39,6 @@ const initRobot = () => {
     robot.width = 30
     robot.height = 30
     robot.position.set(200, 200)
-    robot.anchor.set(0.5)
 }
 
 const initFruits = () => {
@@ -78,7 +77,7 @@ const initTrees = () => {
 
 const initDetectionCircle = () => {
     // Initialiser le cercle de détection
-    const detectionRadius = 50; 
+    const detectionRadius = 50;
     detectionCircle.x = robot.x;
     detectionCircle.y = robot.y;
     detectionCircle.beginFill(0xFFFFFF, 0.2);
@@ -143,14 +142,14 @@ const loop = () => {
             detectedApples.push(apple);
         }
     }
-    
+
     for (let i = 0; i < detectedApples.length; i++) {
         const apple = detectedApples[i];
         let angle = angleBetween(robot, apple);
         currentDirection.y += Math.sin(angle) * 1;
         currentDirection.x += Math.cos(angle) * 1;
     }
-    
+
 
     // Normaliser la direction actuelle pour maintenir une vitesse constante
     let directionLength = Math.sqrt(currentDirection.x * currentDirection.x + currentDirection.y * currentDirection.y);
@@ -168,7 +167,7 @@ const loop = () => {
         robot.y = 10;
     }
     if (robot.y - robot.height / 2 < -30) {
-        robot.y = window.innerHeight;
+        robot.y = app.screen.height;
     }
 
     // Mettre à jour les coordonnées du cercle de détection
@@ -220,7 +219,7 @@ const initAll = () => {
     initFruits();
     detectionRadius = initDetectionCircle();
 
-    startGame(detectionRadius);    
+    startGame(detectionRadius);
 }
 
 const appReset = () => {
