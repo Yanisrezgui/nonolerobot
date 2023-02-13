@@ -8,6 +8,11 @@ let apples = [];
 // Ajoutez un tableau pour les arbres
 let trees = [];    
 
+// Initialise la direction actuelle du robot
+let currentDirection = {x: -1, y: 1};
+
+const detectionCircle = new PIXI.Graphics();
+
 const initApp = () => {
     app = new PIXI.Application({
         width: 1000,
@@ -71,28 +76,28 @@ const initTrees = () => {
     }
 }
 
+const initDetectionCircle = () => {
+    // Initialiser le cercle de détection
+    const detectionRadius = 50; 
+    detectionCircle.x = robot.x;
+    detectionCircle.y = robot.y;
+    detectionCircle.beginFill(0xFFFFFF, 0.2);
+    detectionCircle.drawCircle(0, 0, detectionRadius);
+    detectionCircle.endFill();
+    app.stage.addChild(detectionCircle);
+
+    return detectionRadius
+}
+
 const startGame = () => {
     app.ticker.add(delta => {
         loop(delta);
         checkCollision();
-    checkDetection();
+        checkDetection(detectionRadius);
     });
-
-// Initialise la direction actuelle du robot
-let currentDirection = {x: -1, y: 1};
-
-// Initialiser le cercle de détection
-const detectionRadius = 50;
-const detectionCircle = new PIXI.Graphics();
-detectionCircle.x = robot.x;
-detectionCircle.y = robot.y;
-detectionCircle.beginFill(0xFFFFFF, 0.2);
-detectionCircle.drawCircle(0, 0, detectionRadius);
-detectionCircle.endFill();
-app.stage.addChild(detectionCircle);
 }
 
-function loop(delta) {
+const loop = () => {
     let speedFactor = 2;
 
     // On déplace le robot dans la direction actuelle
@@ -172,19 +177,19 @@ function loop(delta) {
 }
 
 // Calcule la distance entre deux objets
-function calculateDistance(obj1, obj2) {
+const calculateDistance = (obj1, obj2) => {
     let xDiff = obj1.x - obj2.x;
     let yDiff = obj1.y - obj2.y;
     return Math.sqrt(xDiff * xDiff + yDiff * yDiff);
 }
 
 // calculer l'angle entre deux objets
-function angleBetween(sprite1, sprite2) {
+const angleBetween = (sprite1, sprite2) => {
     return Math.atan2(sprite2.y - sprite1.y, sprite2.x - sprite1.x);
 }
 
 // Ajoutez une fonction pour vérifier la collision entre le robot et les pommes
-function checkCollision() {
+const checkCollision = () => {
     for (let i = 0; i < apples.length; i++) {
         let apple = apples[i];
         if (robot.x <= (apple.x + apple.width) && (robot.x + robot.width) >= apple.x &&
@@ -196,7 +201,7 @@ function checkCollision() {
     }
 }
 
-function checkDetection() {
+const checkDetection = () => {
     detectionCircle.x = robot.x + robot.width / 2;
     detectionCircle.y = robot.y + robot.height / 2;
     for (let i = 0; i < trees.length; i++) {
@@ -213,8 +218,9 @@ const initAll = () => {
     initRobot();
     initTrees();
     initFruits();
+    detectionRadius = initDetectionCircle();
 
-    startGame();    
+    startGame(detectionRadius);    
 }
 
 const appReset = () => {
