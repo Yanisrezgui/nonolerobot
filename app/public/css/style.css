@@ -1,4 +1,5 @@
 @import url("https://fonts.cdnfonts.com/css/robot-9000");
+
 * {
   padding: 0;
   margin: 0;
@@ -28,9 +29,11 @@ h1 {
   color: white;
   margin-top: 100px;
 }
+
 .accueil-container h1 {
   font-size: 72px;
 }
+
 .accueil-container .subtitle {
   font-family: "Roboto", sans-serif;
   color: rgba(255, 255, 255, 0.44);
@@ -40,6 +43,7 @@ h1 {
 .buttons-nav {
   margin-top: 5%;
 }
+
 .buttons-nav a {
   text-decoration: none;
   color: #F6F6F6;
@@ -51,6 +55,7 @@ h1 {
   margin: 0 10px;
   transition: all 0.3s ease-in-out;
 }
+
 .buttons-nav a:hover {
   background-color: rgba(0, 100, 82, 0.26);
 }
@@ -60,10 +65,12 @@ nav {
   margin-top: 30px;
   margin-left: 15px;
 }
+
 nav h1 {
   font-size: 32px;
   width: 70%;
 }
+
 nav ul {
   list-style: none;
   padding: 0;
@@ -71,16 +78,19 @@ nav ul {
   display: flex;
   align-items: center;
 }
+
 nav ul li {
   display: inline-block;
   margin: 0 45px;
   font-family: "Roboto", sans-serif;
   font-size: 24px;
 }
+
 nav ul li a {
   color: #fff;
   text-decoration: none;
 }
+
 nav ul li a:hover {
   color: #ccc;
 }
@@ -88,19 +98,23 @@ nav ul li a:hover {
 .undergame-container {
   margin: 3em 25px;
 }
+
 .undergame-container .game-option {
   position: absolute;
   z-index: 1;
 }
-.undergame-container .game-option div > img {
+
+.undergame-container .game-option div>img {
   width: 50px;
 }
+
 .undergame-container .settings {
   display: flex;
   flex-direction: column;
   position: absolute;
   right: 20px;
 }
+
 .undergame-container .settings h2 {
   font-family: "Roboto", sans-serif;
   font-size: 32px;
@@ -111,18 +125,22 @@ nav ul li a:hover {
   width: 400px;
   text-align: center;
 }
+
 .undergame-container .settings h3 {
   font-family: "Inter", sans-serif;
   font-size: 15px;
   color: rgba(246, 246, 246, 0.6);
 }
+
 .undergame-container .settings .settings-options {
   text-align: center;
   margin-top: 50px;
 }
+
 .undergame-container .settings .option {
   margin-top: 35px;
 }
+
 .undergame-container .settings .green-bar {
   background-color: #006452;
   width: 250px;
@@ -130,15 +148,19 @@ nav ul li a:hover {
   border-radius: 5px;
   margin: 2px auto;
 }
+
 .undergame-container .settings .settings-nav {
   display: flex;
   width: 338px;
   margin: 75px auto;
 }
+
 .undergame-container .settings .settings-nav ul {
   list-style: none;
 }
-.undergame-container .settings .settings-nav li:first-child, .undergame-container .settings .settings-nav li:last-child {
+
+.undergame-container .settings .settings-nav li:first-child,
+.undergame-container .settings .settings-nav li:last-child {
   font-family: "Inter", sans-serif;
   background-color: rgba(0, 100, 82, 0.26);
   padding: 2px 20px 2px 20px;
@@ -146,9 +168,11 @@ nav ul li a:hover {
   font-weight: 600;
   color: #F6F6F6;
 }
+
 .undergame-container .settings .settings-nav li:nth-child(2) {
   background-color: #006452;
 }
+
 .undergame-container .settings .settings-nav li {
   font-family: "Roboto", sans-serif;
   background-color: #262626;
@@ -158,6 +182,50 @@ nav ul li a:hover {
   color: #F6F6F6;
   border-radius: 5px;
   margin-right: 4px;
+}
+
+#myProgress {
+  width: 100%;
+  background-color: red;
+}
+
+#myBar {
+  width: 100%;
+  height: 30px;
+  background-color: #04AA6D;
+}
+
+.c-dialog {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  padding: 2.4rem;
+  transition: .7s;
+  width: 1000px;
+  height: 1000px;
+}
+
+.c-dialog__box {
+  flex: 1;
+  max-width: 48rem;
+  margin: auto;
+  padding: 2.4rem;
+}
+
+.c-dialog[aria-hidden="true"] {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.c-dialog img {
+  width: 500px;
+  height: 500px;
+  cursor: pointer;
+
 }
 
 /*# sourceMappingURL=style.css.map */

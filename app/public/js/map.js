@@ -2,6 +2,9 @@ app = undefined;
 robot = new PIXI.Sprite.from('../images/game/robot.png');
 
 let play = true;
+let LifeBar = document.getElementById("myBar")
+
+
 
 // Ajoutez un compteur pour les pommes
 let appleCounter = 0;
@@ -199,6 +202,10 @@ const checkCollision = () => {
             app.stage.removeChild(apple);
             apples.splice(i, 1);
             appleCounter--
+            NonoLife++
+            LifeBar.style.width = NonoLife + "%";
+            LifeBar.innerHTML = NonoLife + "%"
+
         }
     }
 }
@@ -210,7 +217,6 @@ const checkDetection = (detectionCircle) => {
         let tree = trees[i];
         let distance = Math.sqrt(Math.pow(tree.x - detectionCircle.x, 2) + Math.pow(tree.y - detectionCircle.y, 2));
         if (distance < detectionRadius + tree.width / 2) {
-            console.log("Il y a un arbre devant le robot !");
         }
     }
 }
@@ -221,8 +227,9 @@ const initAll = () => {
     initTrees();
     initFruits();
     detectionCircle = initDetectionCircle();
+    NonoLife = 100;
 
-    startGame(detectionCircle);
+    startGame(detectionCircle, NonoLife);
 }
 
 const appReset = () => {
@@ -254,3 +261,22 @@ document.getElementById("play-button").addEventListener("click", () => {
 
     play = !play;
 })
+
+
+setInterval(LoseLife, 2000)
+function LoseLife() {
+    if (NonoLife <= 1) {
+        app.stop();
+        document.getElementById('dialog').ariaHidden = "false"
+    } else {
+        NonoLife--
+        LifeBar.style.width = NonoLife + "%";
+        LifeBar.innerHTML = NonoLife + "%"
+    }
+}
+
+document.getElementById('replay').addEventListener("click", () => {
+    document.getElementById('dialog').ariaHidden = "true"
+    appReset()
+})
+
