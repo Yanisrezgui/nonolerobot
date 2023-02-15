@@ -265,7 +265,7 @@ document.getElementById("play-button").addEventListener("click", () => {
 
 setInterval(LoseLife, 2000)
 function LoseLife() {
-    if (NonoLife <= 1) {
+    if (NonoLife <= 0) {
         app.stop();
         document.getElementById('dialog').ariaHidden = "false"
     } else {
