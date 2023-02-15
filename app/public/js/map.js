@@ -1,10 +1,14 @@
 app = undefined;
 robot = new PIXI.Sprite.from('../images/game/robot.png');
+detectionCircle = undefined;
 
 let play = true;
 let LifeBar = document.getElementById("myBar")
 
-
+let appleAmount = 20;
+let treeAmount = 20;
+let detectionRadius = 50;
+let speedFactor = 2;
 
 // Ajoutez un compteur pour les pommes
 let appleCounter = 0;
@@ -12,8 +16,6 @@ let appleCounter = 0;
 let apples = [];
 // Ajoutez un tableau pour les arbres
 let trees = [];
-
-const detectionRadius = 50;
 
 // Initialise la direction actuelle du robot
 let currentDirection = { x: -1, y: 1 };
@@ -55,7 +57,7 @@ const initFruits = () => {
         if (appleCounter == -1) {
             appleCounter++;
             clearInterval(fruitsInterval);
-        } else if (appleCounter < 20) {
+        } else if (appleCounter < appleAmount) {
             const apple = new PIXI.Sprite.from('../images/game/pomme.png');
             apple.width = 20;
             apple.height = 20;
@@ -70,19 +72,20 @@ const initFruits = () => {
 
 const initTrees = () => {
     // Initialiser les 20 arbres
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < treeAmount; i++) {
         const tree = new PIXI.Sprite.from('../images/game/arbre.png');
-        app.stage.addChild(tree);
         tree.width = 30;
         tree.height = 30;
         tree.position.set(Math.random() * app.screen.width, Math.random() * app.screen.height);
         trees.push(tree);
+        
+        app.stage.addChild(tree);
     }
 }
 
 const initDetectionCircle = () => {
     // Initialiser le cercle de détection
-    const detectionCircle = new PIXI.Graphics();
+    detectionCircle = new PIXI.Graphics();
 
     detectionCircle.x = robot.x;
     detectionCircle.y = robot.y;
@@ -90,21 +93,24 @@ const initDetectionCircle = () => {
     detectionCircle.drawCircle(0, 0, detectionRadius);
     detectionCircle.endFill();
     app.stage.addChild(detectionCircle);
-
-    return detectionCircle;
 }
+
+const changeDetectionCircleRadius = (newRadius) => {
+    detectionCircle.clear(); // Effacer la forme graphique existante
+    detectionCircle.beginFill(0xFFFFFF, 0.2);
+    detectionCircle.drawCircle(0, 0, newRadius);
+    detectionCircle.endFill();
+}    
 
 const startGame = () => {
     app.ticker.add(delta => {
-        loop(detectionCircle);
+        loop();
         checkCollision();
-        checkDetection(detectionCircle);
+        checkDetection();
     });
 }
 
-const loop = (detectionCircle) => {
-    let speedFactor = 2;
-
+const loop = () => {
     // On déplace le robot dans la direction actuelle
     robot.x += currentDirection.x * speedFactor;
     robot.y += currentDirection.y * speedFactor;
@@ -138,7 +144,6 @@ const loop = (detectionCircle) => {
         currentDirection.y += Math.sin(angle) * 2;
         currentDirection.x += Math.cos(angle) * 2;
     }
-
 
     // On vérifie si une ou plusieurs pomme(s) se trouve(nt) dans la zone de détection
     for (let i = 0; i < apples.length; i++) {
@@ -205,12 +210,11 @@ const checkCollision = () => {
             NonoLife++
             LifeBar.style.width = NonoLife + "%";
             LifeBar.innerHTML = NonoLife + "%"
-
         }
     }
 }
 
-const checkDetection = (detectionCircle) => {
+const checkDetection = () => {
     detectionCircle.x = robot.x + robot.width / 2;
     detectionCircle.y = robot.y + robot.height / 2;
     for (let i = 0; i < trees.length; i++) {
@@ -222,14 +226,15 @@ const checkDetection = (detectionCircle) => {
 }
 
 const initAll = () => {
+    // initConstant();
     initApp();
     initRobot();
     initTrees();
     initFruits();
-    detectionCircle = initDetectionCircle();
+    initDetectionCircle();
     NonoLife = 100;
 
-    startGame(detectionCircle, NonoLife);
+    startGame(NonoLife);
 }
 
 const appReset = () => {
@@ -246,9 +251,17 @@ const appReset = () => {
     initAll();
 }
 
-addEventListener("DOMContentLoaded", () => {
-    initAll();
-})
+setInterval(LoseLife, 2000)
+function LoseLife() {
+    if (NonoLife <= 0) {
+        app.stop();
+        document.getElementById('dialog').ariaHidden = "false"        
+    } else {
+        NonoLife--
+        LifeBar.style.width = NonoLife + "%";
+        LifeBar.innerHTML = NonoLife + "%"
+    }
+}
 
 document.getElementById("play-button").addEventListener("click", () => {
     if (play) {
@@ -262,21 +275,25 @@ document.getElementById("play-button").addEventListener("click", () => {
     play = !play;
 })
 
-
-setInterval(LoseLife, 2000)
-function LoseLife() {
-    if (NonoLife <= 0) {
-        app.stop();
-        document.getElementById('dialog').ariaHidden = "false"
-    } else {
-        NonoLife--
-        LifeBar.style.width = NonoLife + "%";
-        LifeBar.innerHTML = NonoLife + "%"
-    }
-}
-
 document.getElementById('replay').addEventListener("click", () => {
     document.getElementById('dialog').ariaHidden = "true"
     appReset()
 })
 
+document.getElementById("submit").addEventListener("click", () => {
+    appleAmount = document.getElementById("cherries").value;
+    treeAmount = document.getElementById("tree").value;
+    detectionRadius = document.getElementById("sensors").value;
+    speedFactor = document.getElementById("speed").value;
+
+    changeDetectionCircleRadius(detectionRadius);
+})
+
+addEventListener("DOMContentLoaded", () => {
+    document.getElementById("cherries").value = appleAmount;
+    document.getElementById("tree").value = treeAmount;
+    document.getElementById("sensors").value = detectionRadius;
+    document.getElementById("speed").value = speedFactor;
+
+    initAll();
+})
