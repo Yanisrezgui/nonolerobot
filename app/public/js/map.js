@@ -251,17 +251,6 @@ const appReset = () => {
     initAll();
 }
 
-setInterval(LoseLife, 2000)
-function LoseLife() {
-    if (NonoLife <= 0) {
-        app.stop();
-        document.getElementById('dialog').ariaHidden = "false"
-    } else {
-        NonoLife--
-        LifeBar.style.width = NonoLife + "%";
-        LifeBar.innerHTML = NonoLife + "%"
-    }
-}
 
 document.getElementById("play-button").addEventListener("click", () => {
     if (play) {
@@ -275,10 +264,7 @@ document.getElementById("play-button").addEventListener("click", () => {
     play = !play;
 })
 
-document.getElementById('replay').addEventListener("click", () => {
-    document.getElementById('dialog').ariaHidden = "true"
-    appReset()
-})
+
 
 document.getElementById("submit").addEventListener("click", () => {
     appleAmount = document.getElementById("cherries").value;
@@ -296,4 +282,21 @@ addEventListener("DOMContentLoaded", () => {
     document.getElementById("speed").value = speedFactor;
 
     initAll();
+})
+
+setInterval(LoseLife, 2000)
+function LoseLife() {
+    if (NonoLife <= 0) {
+        app.stop();
+        document.getElementById('dialog').ariaHidden = "false"
+    } else {
+        NonoLife--
+        LifeBar.style.width = NonoLife + "%";
+        LifeBar.innerHTML = NonoLife + "%"
+    }
+}
+
+document.getElementById('replay').addEventListener("click", () => {
+    document.getElementById('dialog').ariaHidden = "true"
+    appReset()
 })
