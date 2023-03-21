@@ -13,6 +13,10 @@ h1 {
   color: #F6F6F6;
 }
 
+#myBar {
+  background-color: red;
+}
+
 .hook {
   color: #343434;
   margin: 0 5px 0 20px;
