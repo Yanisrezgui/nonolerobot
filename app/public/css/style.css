@@ -14,10 +14,6 @@ h1 {
   color: #F6F6F6;
 }
 
-#myBar {
-  background-color: red;
-}
-
 .hook {
   color: #343434;
   margin: 0 5px 0 20px;
@@ -146,9 +142,6 @@ nav ul li a:hover {
 }
 
 .undergame-container .settings .green-bar {
-  text-align: center;
-  font-size: 24px;
-  font-weight: bold;
   background-color: #006452;
   width: 250px;
   height: 35px;
@@ -189,6 +182,50 @@ nav ul li a:hover {
   color: #F6F6F6;
   border-radius: 5px;
   margin-right: 4px;
+}
+
+#myProgress {
+  width: 100%;
+  background-color: red;
+}
+
+#myBar {
+  width: 100%;
+  height: 30px;
+  background-color: #04AA6D;
+}
+
+.c-dialog {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  padding: 2.4rem;
+  transition: .7s;
+  width: 1000px;
+  height: 1000px;
+}
+
+.c-dialog__box {
+  flex: 1;
+  max-width: 48rem;
+  margin: auto;
+  padding: 2.4rem;
+}
+
+.c-dialog[aria-hidden="true"] {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.c-dialog img {
+  width: 500px;
+  height: 500px;
+  cursor: pointer;
+
 }
 
 /*# sourceMappingURL=style.css.map */

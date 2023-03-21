@@ -232,7 +232,7 @@ const initAll = () => {
     initTrees();
     initFruits();
     initDetectionCircle();
-    NonoLife = 1;
+    NonoLife = 100;
 
     startGame(NonoLife);
 }
