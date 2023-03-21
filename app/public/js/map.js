@@ -78,7 +78,7 @@ const initTrees = () => {
         tree.height = 30;
         tree.position.set(Math.random() * app.screen.width, Math.random() * app.screen.height);
         trees.push(tree);
-        
+
         app.stage.addChild(tree);
     }
 }
@@ -100,7 +100,7 @@ const changeDetectionCircleRadius = (newRadius) => {
     detectionCircle.beginFill(0xFFFFFF, 0.2);
     detectionCircle.drawCircle(0, 0, newRadius);
     detectionCircle.endFill();
-}    
+}
 
 const startGame = () => {
     app.ticker.add(delta => {
@@ -232,7 +232,7 @@ const initAll = () => {
     initTrees();
     initFruits();
     initDetectionCircle();
-    NonoLife = 100;
+    NonoLife = 1;
 
     startGame(NonoLife);
 }
@@ -255,7 +255,7 @@ setInterval(LoseLife, 2000)
 function LoseLife() {
     if (NonoLife <= 0) {
         app.stop();
-        document.getElementById('dialog').ariaHidden = "false"        
+        document.getElementById('dialog').ariaHidden = "false"
     } else {
         NonoLife--
         LifeBar.style.width = NonoLife + "%";
