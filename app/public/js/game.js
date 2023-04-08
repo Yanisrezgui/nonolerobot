@@ -16,7 +16,7 @@ const startGame = () => {
     app.ticker.add(delta => {
         loop();
         checkCollision();
-        checkDetection();
+        // checkDetection();
     });
 }
 
@@ -92,8 +92,8 @@ const loop = () => {
     }
 
     // Mettre à jour les coordonnées du cercle de détection
-    detectionCircle.x = robot.x;
-    detectionCircle.y = robot.y;
+    // detectionCircle.x = robot.x;
+    // detectionCircle.y = robot.y;
 }
 
 // Calcule la distance entre deux objets
@@ -124,23 +124,24 @@ const checkCollision = () => {
     }
 }
 
-const checkDetection = () => {
-    detectionCircle.x = robot.x + robot.width / 2;
-    detectionCircle.y = robot.y + robot.height / 2;
-    for (let i = 0; i < trees.length; i++) {
-        let tree = trees[i];
-        let distance = Math.sqrt(Math.pow(tree.x - detectionCircle.x, 2) + Math.pow(tree.y - detectionCircle.y, 2));
-        if (distance < detectionRadius + tree.width / 2) {
-        }
-    }
-}
+// const checkDetection = () => {
+//     detectionCircle.x = robot.x + robot.width / 2;
+//     detectionCircle.y = robot.y + robot.height / 2;
+//     for (let i = 0; i < trees.length; i++) {
+//         let tree = trees[i];
+//         let distance = Math.sqrt(Math.pow(tree.x - detectionCircle.x, 2) + Math.pow(tree.y - detectionCircle.y, 2));
+//         if (distance < detectionRadius + tree.width / 2) {
+//         }
+//     }
+// }
 
 const initAll = () => {
     initApp();
     initRobot();
     initTrees();
     initFruits();
-    initDetectionCircle();
+    initDetectionSensorL();
+    initDetectionSensorR();
     NonoLife = 100;
 
     startGame(NonoLife);

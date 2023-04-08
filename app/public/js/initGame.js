@@ -1,5 +1,6 @@
 var app = undefined;
-var detectionCircle = undefined;
+var detectionSensorL = undefined;
+var detectionSensorR = undefined;
 
 const robot = new PIXI.Sprite.from('../images/game/robot.png');
 
@@ -66,14 +67,56 @@ const initTrees = () => {
     }
 }
 
-const initDetectionCircle = () => {
+const initDetectionSensorL = () => {
     // Initialiser le cercle de détection
-    detectionCircle = new PIXI.Graphics();
+    detectionSensorL = new PIXI.Graphics();
 
-    detectionCircle.x = robot.x;
-    detectionCircle.y = robot.y;
-    detectionCircle.beginFill(0xFFFFFF, 0.2);
-    detectionCircle.drawCircle(0, 0, detectionRadius);
-    detectionCircle.endFill();
-    app.stage.addChild(detectionCircle);
+    detectionSensorL.x = robot.x;
+    detectionSensorL.y = robot.y;
+    const width = 50; // longueur de la base du triangle
+    const height = 200; // hauteur du triangle
+
+    const points = [
+        new PIXI.Point(0, width / 2), // point A
+        new PIXI.Point(-(width / 2), -(height / 2)), // point B
+        new PIXI.Point(width / 2, -(height / 2)), // point C
+    ];
+
+    const triangle = new PIXI.Polygon(points);
+
+    // Dessiner le polygone sur la scène
+    detectionSensorL.beginFill(0xFF0000); // Choisir la couleur de remplissage (rouge)
+    detectionSensorL.drawPolygon(triangle);
+    detectionSensorL.endFill();
+    app.stage.addChild(detectionSensorL);
+
+    detectionSensorL.pivot.set(0, width / 2);
+    detectionSensorL.angle = sensorAngle - 15;
+}
+
+const initDetectionSensorR = () => {
+    // Initialiser le cercle de détection
+    detectionSensorR = new PIXI.Graphics();
+
+    detectionSensorR.x = robot.x;
+    detectionSensorR.y = robot.y;
+    const width = 50; // longueur de la base du triangle
+    const height = 200; // hauteur du triangle
+
+    const points = [
+        new PIXI.Point(0, width / 2), // point A
+        new PIXI.Point(-(width / 2), -(height / 2)), // point B
+        new PIXI.Point(width / 2, -(height / 2)), // point C
+    ];
+
+    const triangle = new PIXI.Polygon(points);
+
+    // Dessiner le polygone sur la scène
+    detectionSensorR.beginFill(0xFF0000); // Choisir la couleur de remplissage (rouge)
+    detectionSensorR.drawPolygon(triangle);
+    detectionSensorR.endFill();
+    app.stage.addChild(detectionSensorR);
+
+    detectionSensorR.pivot.set(0, width / 2);
+    detectionSensorR.angle = sensorAngle + 15;
 }
