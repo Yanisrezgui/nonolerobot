@@ -3,7 +3,10 @@ let treeAmount = 20;
 let detectionRadius = 50;
 let speedFactor = 2;
 
-let sensorAngle = 90;
+let nbSensors = 2;
+let sensorWidth = 50;
+let sensorHeight = 200;
+let fov = 15;
 
 // Ajoutez un compteur pour les pommes
 let appleCounter = 0;

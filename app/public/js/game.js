@@ -140,8 +140,8 @@ const initAll = () => {
     initRobot();
     initTrees();
     initFruits();
-    initDetectionSensorL();
-    initDetectionSensorR();
+    // initDetectionSensorL();
+    // initDetectionSensorR();
     NonoLife = 100;
 
     startGame(NonoLife);
