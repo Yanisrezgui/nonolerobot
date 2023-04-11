@@ -1,48 +1,48 @@
 function make_robot(parent) {
-    nono = new Robot( Math.random() * app.renderer.width,
-		      Math.random() * app.renderer.height,
-		      Math.random() * Math.PI*2, sensor_range_default );
-    
-    parent.addChild( nono );
+	nono = new Robot(Math.random() * app.renderer.width,
+		Math.random() * app.renderer.height,
+		Math.random() * Math.PI * 2, sensor_range_default);
+
+	parent.addChild(nono);
 }
 
 class Sensor extends PIXI.Graphics {
 
-    constructor(x, y, r, range, fov) {
-    
-	// position : x,y
-	// oriantation : r (radians)
-	// max range : range  
-	// angle of view : fov (radians) 
+	constructor(x, y, r, range, fov) {
 
-	super();
-	this.moveTo(x,y);
-	this.beginFill(0xaaaaaa);
-	this.lineStyle(1, 0x444444, 1);
-	this.min_angle = r - fov/2;
-	this.max_angle = r + fov/2;
-	this.range = range;
-	this.arc(x, y, range, this.min_angle, this.max_angle)
-	this.endFill();
-	this.name = "Sensor";
-	this.alpha = .3;
-	
-    }
-    
-    read( angle, dist ) {
-	
-	// check if angle falls within our bounds 
-	
-	if (angle < this.max_angle && angle > this.min_angle)
-	    return 1 - dist / this.range;
-	return Infinity;
-	
-    }
+		// position : x,y
+		// oriantation : r (radians)
+		// max range : range  
+		// angle of view : fov (radians) 
+
+		super();
+		this.moveTo(x, y);
+		this.beginFill(0xaaaaaa);
+		this.lineStyle(1, 0x444444, 1);
+		this.min_angle = r - fov / 2;
+		this.max_angle = r + fov / 2;
+		this.range = range;
+		this.arc(x, y, range, this.min_angle, this.max_angle)
+		this.endFill();
+		this.name = "Sensor";
+		this.alpha = .3;
+
+	}
+
+	read(angle, dist) {
+
+		// check if angle falls within our bounds 
+
+		if (angle < this.max_angle && angle > this.min_angle)
+			return 1 - dist / this.range;
+		return Infinity;
+
+	}
 }
 
 class Robot extends PIXI.Container {
 
-    constructor(x, y, r, s) {
+	constructor(x, y, r, s) {
 
 		super();
 
@@ -74,24 +74,24 @@ class Robot extends PIXI.Container {
 
 		this.sensors = [];
 		this.sensor_values = [];
-		for (let i=0; i<sensor_angles.length; i++) {
+		for (let i = 0; i < sensor_angles.length; i++) {
 			let s = new Sensor(x, y, sensor_angles[i],
-					   this.sensor_range, sensor_fov);
+				this.sensor_range, sensor_fov);
 			this.sensors.push(s);
 			this.sensor_values.push(0);
 			this.sensor_values.push(0);
 		}
 
 		//Neuronr controller parametres
-		this.nn_parametres = [0, 10,10, 0, 0, 10, 0, 10];
+		this.nn_parametres = [0, 10, 10, 0, 0, 10, 0, 10];
 
 
 		// add all to this container
-		for (let i=0; i<this.sensors.length; i++)
+		for (let i = 0; i < this.sensors.length; i++)
 			this.addChild(this.sensors[i]);
 
 		this.addChild(this.sprite);
-    }
+	}
 
 	getCoord() {
 		let x = this.x
@@ -106,51 +106,59 @@ class Robot extends PIXI.Container {
 		this.sensor_values.fill(Infinity);
 
 		// check if a obstacle is within the circle sensor_range
-		for (let i=0; i<num_obstacles; i++) {
-			let dist=Math.sqrt((obstacles[i].x-this.x)**2 +
-				(obstacles[i].y-this.y)**2);
-			if (dist<this.sensor_range && dist != 0 ){
-				hits.push([obstacles[i], dist]);				
+		for (let i = 0; i < num_obstacles; i++) {
+			let dist = Math.sqrt((obstacles[i].x - this.x) ** 2 +
+				(obstacles[i].y - this.y) ** 2);
+			if (dist < this.sensor_range && dist != 0) {
+				hits.push([obstacles[i], dist]);
 			}
 		}
 
 		// check if a cherry is within the circle sensor_range
-		for (let i=0; i<num_cherries; i++) {
-			let dist=Math.sqrt((cherries[i].x-this.x)**2 +
-				(cherries[i].y-this.y)**2);
-			if (dist<this.sensor_range && dist != 0 ){
+		for (let i = 0; i < num_cherries; i++) {
+			let dist = Math.sqrt((cherries[i].x - this.x) ** 2 +
+				(cherries[i].y - this.y) ** 2);
+			if (dist < this.sensor_range && dist != 0) {
 				hits.push([cherries[i], dist]);
 			}
 		}
 
 		// for all hits check where they fall
-		for (let i=0; i<hits.length; i++) {
+		for (let i = 0; i < hits.length; i++) {
 
-			const obj  = hits[i][0] ;
-			const dist = hits[i][1] ;
+			const obj = hits[i][0];
+			const dist = hits[i][1];
 
 			// get position & angle of cherry i in nono coordinate system
 			let x = this.sprite.toLocal(obj.position).x;
 			let y = this.sprite.toLocal(obj.position).y;
-			let a = Math.atan2(y,x);
+			let a = Math.atan2(y, x);
 
 			// are we very close then eat the cherry
 			if (obj instanceof Cherry &&
-				x <  (this.robot_w+obj.width)/2 &&
-				x > -(this.robot_w+obj.width)/2 &&
-				y <  (this.robot_h+obj.height)/2 &&
-				y > -(this.robot_h+obj.height)/2 ){
+				x < (this.robot_w + obj.width) / 2 &&
+				x > -(this.robot_w + obj.width) / 2 &&
+				y < (this.robot_h + obj.height) / 2 &&
+				y > -(this.robot_h + obj.height) / 2) {
 
 				// eat
 				obj.relocate();
-				score ++;
+				score++;
+
+				if (NonoLife >= 100) {
+					NonoLife == NonoLife
+				} else {
+					NonoLife++
+					document.getElementById('myBar').style.width = NonoLife + '%';
+					document.getElementById('myBar').innerHTML = NonoLife + '%';
+				}
 
 				//document.querySelector("#score").style.width = score * 0.01 * 30 + "px";
 				//document.querySelector("#score").style.visibility = "unset";
 
-			} 
+			}
 			//else if (obj instanceof Obstacle &&
-				
+
 			// 	y <  (this.robot_h+obj.height)/2 &&
 			// 	y > -(this.robot_h+obj.height)/2 
 			// 	){
@@ -163,7 +171,7 @@ class Robot extends PIXI.Container {
 			// } else if (obj instanceof Obstacle &&
 			// 	x <  (this.robot_w+obj.width)/2 &&
 			// 	x > -(this.robot_w+obj.width)/2 
-			
+
 			// 	){
 			// 	this.rotation -= 0.1;
 			// 	score ++;
@@ -172,19 +180,19 @@ class Robot extends PIXI.Container {
 			// 	//document.querySelector("#score").style.visibility = "unset";
 
 			// }
-			
+
 			else {
 
 				// get readings and update
-				for (let j=0; j<this.sensors.length; j++){
+				for (let j = 0; j < this.sensors.length; j++) {
 					let s = this.sensors[j];
-					let value = Math.min(this.sensor_values[j], s.read( a , dist ));
+					let value = Math.min(this.sensor_values[j], s.read(a, dist));
 					if (obj instanceof Cherry)
 						this.sensor_values[j] = value;
-					if (obj instanceof Obstacle )
-					// console.log("ok");
-						this.sensor_values[j+2] = value;
-						
+					if (obj instanceof Obstacle)
+						// console.log("ok");
+						this.sensor_values[j + 2] = value;
+
 					//console.log(value);
 				}
 			}
@@ -192,39 +200,41 @@ class Robot extends PIXI.Container {
 
 
 		// replace infinity by zeros
-		for (let j=0; j<this.sensor_values.length; j++)
+		for (let j = 0; j < this.sensor_values.length; j++)
 			if (this.sensor_values[j] === Infinity)
 				this.sensor_values[j] = 0;
 
 		return this.sensor_values;
-    }
-   
-    
-    move(vl, vr, delta) {
+	}
+
+
+	move(vl, vr, delta) {
 
 		// handle vl=vr
-		if (Math.abs(vr-vl) < 10e-16){
-			if(Math.random() < 0.5)
-			vl+=10e-8;
+		if (Math.abs(vr - vl) < 10e-16) {
+			if (Math.random() < 0.5)
+				vl += 10e-8;
 			else
-			vr+=10e-8;
+				vr += 10e-8;
 		}
 
 		vl *= robot_speed;
 		vr *= robot_speed;
 
-		let R = (this.robot_w*(vr+vl)) / (2*(vr-vl));
-		let w = (vr-vl) / this.robot_w
-		let icc = {x : this.x - R * Math.sin(this.rotation),
-			   y : this.y + R * Math.cos(this.rotation) }
+		let R = (this.robot_w * (vr + vl)) / (2 * (vr - vl));
+		let w = (vr - vl) / this.robot_w
+		let icc = {
+			x: this.x - R * Math.sin(this.rotation),
+			y: this.y + R * Math.cos(this.rotation)
+		}
 
 		let x =
-			Math.cos(w*delta) * (this.x-icc.x) -
-			Math.sin(w*delta) * (this.y-icc.y) + icc.x;
+			Math.cos(w * delta) * (this.x - icc.x) -
+			Math.sin(w * delta) * (this.y - icc.y) + icc.x;
 
 		let y =
-			Math.sin(w*delta) * (this.x-icc.x) +
-			Math.cos(w*delta) * (this.y-icc.y) + icc.y;
+			Math.sin(w * delta) * (this.x - icc.x) +
+			Math.cos(w * delta) * (this.y - icc.y) + icc.y;
 
 		let t = this.rotation + w * delta;
 
@@ -236,39 +246,39 @@ class Robot extends PIXI.Container {
 		//console.log(x, y, t);
 
 		this.check_bounds();
-    }
+	}
 
-    reset_sensor(){
+	reset_sensor() {
 		this.sensor_range = document.getElementById("vision").value;
 		//console.log(this.sensor_range);
 		return this.sensor_range;
 	}
 
-	set_sensor_range(range){
+	set_sensor_range(range) {
 		this.sensor_range = range;
 	}
 
-    reset(){
+	reset() {
 		this.x = Math.random() * app.renderer.width;
 		this.y = Math.random() * app.renderer.height;
-		this.rotation = Math.random() * Math.PI*2;
+		this.rotation = Math.random() * Math.PI * 2;
 		this.sensor_range = this.reset_sensor();
 		this.updateTransform();
 	}
 
-    check_bounds(){
+	check_bounds() {
 
-		if (this.x>app.renderer.width)
+		if (this.x > app.renderer.width)
 			this.x -= app.renderer.width;
-		if (this.x<0)
+		if (this.x < 0)
 			this.x += app.renderer.width;
 
-		if (this.y>app.renderer.height)
+		if (this.y > app.renderer.height)
 			this.y -= app.renderer.height;
-		if (this.y<0)
+		if (this.y < 0)
 			this.y += app.renderer.height;
 
-    }
+	}
 
 
 	/**
@@ -277,7 +287,7 @@ class Robot extends PIXI.Container {
 	 * @return {number[]}
 	 */
 	random_controller(sensors) {
-	
+
 		let dice = Math.random();
 
 		// move straight
@@ -285,15 +295,15 @@ class Robot extends PIXI.Container {
 		let vr = 1;
 
 		// but once in wihile turn randomly
-		if (dice < 0.2){
+		if (dice < 0.2) {
 			if (dice < 0.1)
-				vr = -vr ;
+				vr = -vr;
 			else
-			vl = -vl ;
+				vl = -vl;
 		}
 
-		return [vl,vr];
-    }
+		return [vl, vr];
+	}
 
 
 	/**
@@ -311,14 +321,14 @@ class Robot extends PIXI.Container {
 
 	normalize(value) {
 		return (value - 0.5) * 2;
-	  }
+	}
 
 	/**
 	 * controller with neural network
 	 * @param sensors
 	 * @return {number[]}
 	 */
-	nono_controller(sensors){
+	nono_controller(sensors) {
 		let vr;
 		let vl;
 
@@ -330,13 +340,13 @@ class Robot extends PIXI.Container {
 			sensors[1] * this.nn_parametres[2] +
 			sensors[2] * this.nn_parametres[4] +
 			sensors[3] * this.nn_parametres[6]);
-		
-		 vr = this.sigmoid(bias_value +
+
+		vr = this.sigmoid(bias_value +
 			sensors[0] * this.nn_parametres[1] +
 			sensors[1] * this.nn_parametres[3] +
 			sensors[2] * this.nn_parametres[5] +
 			sensors[3] * this.nn_parametres[7]);
-	
+
 		vr = this.normalize(vr);
 		vl = this.normalize(vl);
 
@@ -348,18 +358,18 @@ class Robot extends PIXI.Container {
 	 * move straight
 	 * @return {number[]}
 	 */
-    straight_controller() {
-		return [1,1];
-    }
+	straight_controller() {
+		return [1, 1];
+	}
 
 	/**
 	 * move backward
 	 * @return {number[]}
 	 */
 	backward_controller() {
-		return [-1,-1];
+		return [-1, -1];
 	}
 
-    
- 
+
+
 }
