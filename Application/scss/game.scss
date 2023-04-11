@@ -63,7 +63,7 @@ nav {
     }
 
     .container-vision {
-        h3 {
+        h2 {
             display: flex;
             justify-content: center;
             padding-bottom: 10px;
@@ -87,22 +87,23 @@ nav {
         }
     }
 
+    .container-neuronnes {
+
+        h1 {
+            display: flex;
+            justify-content: center;
+            padding-bottom: 10px;
+        }
+    
+        #myDiagramDiv{
+            margin: 0 auto;
+            width: 600px;
+            height: 400px;
+            background-color: white;
+        }
+    }
 
 }
 
 
-.container-neuronnes {
 
-    h1 {
-        display: flex;
-        justify-content: center;
-        padding-bottom: 10px;
-    }
-
-    #myDiagramDiv{
-        margin: 0 auto;
-        width: 600px;
-        height: 400px;
-        background-color: white;
-    }
-}

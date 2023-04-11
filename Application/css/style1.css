@@ -113,7 +113,7 @@ nav ul li a:hover {
 .container-game .buttons a {
   cursor: pointer;
 }
-.container-game .container-vision h3 {
+.container-game .container-vision h2 {
   display: flex;
   justify-content: center;
   padding-bottom: 10px;
@@ -133,13 +133,12 @@ nav ul li a:hover {
   border-radius: 5px;
   cursor: pointer;
 }
-
-.container-neuronnes h1 {
+.container-game .container-neuronnes h1 {
   display: flex;
   justify-content: center;
   padding-bottom: 10px;
 }
-.container-neuronnes #myDiagramDiv {
+.container-game .container-neuronnes #myDiagramDiv {
   margin: 0 auto;
   width: 600px;
   height: 400px;

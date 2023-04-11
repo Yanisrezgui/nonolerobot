@@ -167,9 +167,6 @@ function init_events() {
 
 	document.getElementById("update").addEventListener("click", ()=>{
 		nono.set_nn_parameter(get_nn_parameter());
-	})
-
-	document.querySelector("#apply").addEventListener('click', ()=>{
 		app.stage.removeChild(nono);
 		nono = new Robot(100,100,0, nono.reset_sensor());
 		app.stage.addChild( nono );

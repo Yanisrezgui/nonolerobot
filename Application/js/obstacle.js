@@ -23,7 +23,7 @@ class Obstacle extends PIXI.Sprite {
 	this.anchor.y = 0.5;
 	this.scale.x = .5;
 	this.scale.y = .5;
-	this.rotation = r;
+	this.rotation = 0;
 	this.name = "Obtacle number "+id;
 	this.tagged = false;
     }
