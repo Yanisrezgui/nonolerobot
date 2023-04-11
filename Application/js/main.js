@@ -161,7 +161,7 @@ function init_events() {
 		elapsed = 0;
 		tics = 0;
 		paused = false;
-
+		timeDuration = [];
 
 	})
 
@@ -190,18 +190,21 @@ function game_loop(delta) {
 		//document.querySelector("#battery").style.width = rate * 400 + "px"
 		//document.querySelector("#pointer").style.left =  rate * 400 + "px"
 
+		if ((tics / 180) >= 5) {
+			tics = 0;
+			let score = num_cherries - cherriesScore;
+			timeDuration.push(score);
+		}
 
 		// robot sens/ act loop
 		if (!debug && (tics % act_rate) == 0) {
 
 			// read sensors
 			let sensors = nono.read_sensors();
-			//console.log(sensors);
 			let motor;
 			// compute controller
 			motor = nono.nono_controller(sensors);
 			nono.move(motor[0], motor[1], dt);
-
 
 		}
 
@@ -210,11 +213,8 @@ function game_loop(delta) {
 		if (debug && (tics % act_rate) == 0 && tics < 100) {
 
 			let sensors = nono.read_sensors();
-			//let motor = [0, 0]
 			let motor = nono.nono_controller(sensors)
 			nono.move(motor[0], motor[1], dt);
-
-			console.log(sensors);
 		}
 	}
 }

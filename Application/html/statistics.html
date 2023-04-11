@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Nono</title>
+    <link rel="stylesheet" href="../css/style1.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
+    />
+  </head>
+  <body>
+    <nav>
+      <h1>
+        <span class="hook"> < </span><span class="slash">/</span>Nono Le
+        Robot<span class="hook">></span>
+      </h1>
+      <ul>
+        <li><a href="./game.html">Settings</a></li>
+        <li><a href="./statistics.html">Statistics</a></li>
+        <li><a href="./accueil.html">Exit</a></li>
+      </ul>
+    </nav>
+    <div id="statistics">
+      <canvas id="myChart"></canvas>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/globals.js"></script>
+
+    <script>
+      let lineChartData = {
+        labels: ["0:00", "0:15", "0:30", "0:45", "1:00", "1:15", "1:30", "1:45", "2:00", "3:00", "3:15", "3:30", "3:45", "4:00", "4:15", "4:30", "4:45", "5:00"],
+        datasets: []
+      }
+
+      timeDuration.forEach(function (a, i) {
+        console.log(a)
+        
+        lineChartData.datasets.push({
+          data: JSON.parse(a)
+        });
+      });
+
+      const ctx = document.getElementById("myChart");
+      new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: lineChartData.labels,
+          datasets: lineChartData.datasets
+        },
+        options: {
+          scales: {
+            y: {
+              suggestedMin: 0,
+              suggestedMax: num_cherries + 15,
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

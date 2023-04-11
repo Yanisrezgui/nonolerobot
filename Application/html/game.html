@@ -1,98 +1,102 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Nono</title>
+    <link rel="stylesheet" href="../css/style1.css" />
+    <!-- boootstrap vue-->
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <!-- boootstrap icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
+    />
+  </head>
 
-<head>
-  <meta charset="utf-8">
-  <title>Nono</title>
-  <link rel="stylesheet" href="../css/style1.css">
-  <!-- boootstrap vue-->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
-  <!-- boootstrap icons -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+  <body>
+    <nav>
+      <h1>
+        <span class="hook"> < </span><span class="slash">/</span>Nono Le
+        Robot<span class="hook">></span>
+      </h1>
+      <ul>
+        <li><a href="./game.html">Settings</a></li>
+        <li><a href="./statistics.html">Statistics</a></li>
+        <li><a href="./accueil.html">Exit</a></li>
+      </ul>
+    </nav>
 
-</head>
+    <div class="container-game">
+      <div id="carte"></div>
 
-<body>
+      <!-- contrôleur -->
+      <div class="controleurs">
+        <h2 class="text-warning">Settings</h2>
+        <!-- buttons -->
+        <div class="bg-warning buttons text-center">
+          <a>
+            <i id="start" class="bi bi-play-circle bi-pause-circle"></i>
+          </a>
+          <a>
+            <i id="reset" class="bi bi-arrow-counterclockwise"></i>
+          </a>
+          <a>
+            <i id="update" class="bi bi-arrow-repeat"></i>
+          </a>
+        </div>
 
-  <nav>
-    <h1>
-      <span class="hook">
-        < </span><span class="slash">/</span>Nono Le Robot<span class="hook">></span>
-    </h1>
-    <ul>
-      <li><a href="./game.html">Settings</a></li>
-      <li><a href="./accueil.html">Statistics</a></li>
-      <li><a href="./accueil.html">Exit</a></li>
-    </ul>
-  </nav>
+        <!-- vision -->
+        <div class="container-vision">
+          <h3 class="text-warning">Vision</h3>
+          <div class="input-group mb-3">
+            <input
+              type="number"
+              id="vision"
+              value="100"
+              class="form-control"
+              placeholder="Recipient's username"
+              aria-label="Recipient's username"
+              aria-describedby="basic-addon2"
+            />
+          </div>
+        </div>
 
-  <div class="container-game">
-
-    <div id="carte">
-    </div>
-
-    <!-- contrôleur -->
-    <div class="controleurs">
-      <h2 class="text-warning">Settings</h2>
-      <!-- buttons -->
-      <div class="bg-warning buttons text-center">
-        <a>
-          <i id="start" class="bi bi-play-circle bi-pause-circle"></i>
-        </a>
-        <a>
-          <i id="reset" class="bi bi-arrow-counterclockwise"></i>
-        </a>
-        <a>
-          <i id="update" class="bi bi-arrow-repeat"></i>
-        </a>
-      </div>
-
-      <!-- vision -->
-      <div class="container-vision">
-        <h3 class="text-warning">Vision</h3>
-        <div class="input-group mb-3">
-          <input type="number" id="vision" value="100" class="form-control" placeholder="Recipient's username"
-            aria-label="Recipient's username" aria-describedby="basic-addon2">
+        <div class="option">
+          <h3>Vie de Nono</h3>
+          <div id="myProgress">
+            <div id="myBar"></div>
+          </div>
+        </div>
+        <!-- neurone -->
+        <div class="container-neuronnes">
+          <h3>Neuronnes</h3>
+          <div id="myDiagramDiv"></div>
         </div>
       </div>
-
-      <div class="option">
-        <h3>Vie de Nono</h3>
-        <div id="myProgress">
-          <div id="myBar"></div>
-        </div>
-      </div>
-      <!-- neurone -->
-      <div class="container-neuronnes">
-        <h3>Neuronnes</h3>
-        <div id="myDiagramDiv"></div>
-      </div>
-
     </div>
 
-  </div>
+    <script src="../pixi/pixi.min.js"></script>
+    <script src="../js/globals.js"></script>
+    <script src="../js/robot.js"></script>
+    <script src="../js/cherry.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../pixi/go-debug.js"></script>
+    <script src="../js/nn-controller.js"></script>
+    <script src="../js/obstacle.js"></script>
 
-
-
-  <script src="../pixi/pixi.min.js"></script>
-  <script src="../js/globals.js"></script>
-  <script src="../js/robot.js"></script>
-  <script src="../js/cherry.js"></script>
-  <script src="../js/main.js"></script>
-  <script src="../pixi/go-debug.js"></script>
-  <script src="../js/nn-controller.js"></script>
-  <script src="../js/obstacle.js"></script>
-
-
-  <!-- nono act -->
-  <script type="text/javascript">
-    demo_init();
-    /* setInterval(LoseLife, 2000)
+    <!-- nono act -->
+    <script type="text/javascript">
+      demo_init();
+      /* setInterval(LoseLife, 2000)
     function LoseLife() {
       if (NonoLife <= 0) {
         app.stop();
@@ -103,10 +107,6 @@
         LifeBar.innerHTML = NonoLife + "%"
       }
     } */
-
-  </script>
-
-
-</body>
-
+    </script>
+  </body>
 </html>

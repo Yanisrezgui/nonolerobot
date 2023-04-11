@@ -68,7 +68,7 @@ class Robot extends PIXI.Container {
 		this.rotation = r;
 		this.param_go = get_nn_parameter();
 		this.sensor_range = s;
-		//this.score = 0;
+		this.cherriesScore = 0;
 
 		// The sensors
 
@@ -136,37 +136,8 @@ class Robot extends PIXI.Container {
 
 				// eat
 				obj.relocate();
-				score ++;
-
-				//document.querySelector("#score").style.width = score * 0.01 * 30 + "px";
-				//document.querySelector("#score").style.visibility = "unset";
-
-			} 
-			//else if (obj instanceof Obstacle &&
-				
-			// 	y <  (this.robot_h+obj.height)/2 &&
-			// 	y > -(this.robot_h+obj.height)/2 
-			// 	){
-			// 	this.rotation += 0.1;
-			// 	score ++;
-
-			// 	//document.querySelector("#score").style.width = score * 0.01 * 30 + "px";
-			// 	//document.querySelector("#score").style.visibility = "unset";
-
-			// } else if (obj instanceof Obstacle &&
-			// 	x <  (this.robot_w+obj.width)/2 &&
-			// 	x > -(this.robot_w+obj.width)/2 
-			
-			// 	){
-			// 	this.rotation -= 0.1;
-			// 	score ++;
-
-			// 	//document.querySelector("#score").style.width = score * 0.01 * 30 + "px";
-			// 	//document.querySelector("#score").style.visibility = "unset";
-
-			// }
-			
-			else {
+				this.cherriesScore ++;
+			} else {
 
 				// get readings and update
 				for (let j=0; j<this.sensors.length; j++){
@@ -315,9 +286,6 @@ class Robot extends PIXI.Container {
 		let vr;
 		let vl;
 
-		// console.log(sensors[0])
-		// console.log(this.nn_parametres[0])
-
 		vl = this.sigmoid(bias_value +
 			sensors[0] * this.nn_parametres[0] +
 			sensors[1] * this.nn_parametres[2] +
@@ -333,7 +301,6 @@ class Robot extends PIXI.Container {
 		vr = this.normalize(vr);
 		vl = this.normalize(vl);
 
-		console.log("vl : " + vl + " vr : "+ vr)
 		return [vr, vl];
 	}
 
