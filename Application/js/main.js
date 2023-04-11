@@ -19,8 +19,6 @@ function demo_init(){
 	//autoResize: true
     });
 
-
-
     // Load ressources (images for sprites)
     
     PIXI.Loader.shared
@@ -34,6 +32,7 @@ function demo_init(){
 	  textures.robot = resources.robot.texture;
 	  textures.cherry = resources.cherry.texture;
 	  textures.obstacle = resources.obstacle.texture;
+	  
 	  
 	  // when finished loading images, start everyting else
 
@@ -63,6 +62,13 @@ function demo_start() {
     // Set the background
 
     app.renderer.backgroundColor = 0x000000;
+
+	const herbe = new PIXI.Sprite.from('../assets/herbe.png')
+    app.stage.addChild(herbe)
+
+    herbe.width = window.innerWidth
+    herbe.height = window.innerHeight
+    herbe.opacity = 0.5
            
     if (! debug ){
 	
