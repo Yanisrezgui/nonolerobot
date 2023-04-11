@@ -136,6 +136,8 @@ nav ul li a:hover {
 
 .container-game .container-vision div {
   text-align: center;
+  border-bottom: 1px solid #F6F6F6;
+  padding: 10px;
 }
 
 .container-game .container-vision div input {
