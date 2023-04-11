@@ -143,29 +143,7 @@ class Robot extends PIXI.Container {
 				//document.querySelector("#score").style.width = score * 0.01 * 30 + "px";
 				//document.querySelector("#score").style.visibility = "unset";
 
-			} else if (obj instanceof Obstacle &&
-				
-				y <  (this.robot_h+obj.height)/2 &&
-				y > -(this.robot_h+obj.height)/2 
-				){
-				this.rotation += 0.1;
-				score ++;
-
-				//document.querySelector("#score").style.width = score * 0.01 * 30 + "px";
-				//document.querySelector("#score").style.visibility = "unset";
-
-			} else if (obj instanceof Obstacle &&
-				x <  (this.robot_w+obj.width)/2 &&
-				x > -(this.robot_w+obj.width)/2 
-			
-				){
-				this.rotation -= 0.1;
-				score ++;
-
-				//document.querySelector("#score").style.width = score * 0.01 * 30 + "px";
-				//document.querySelector("#score").style.visibility = "unset";
-
-			}
+			} 
 			
 			else {
 
