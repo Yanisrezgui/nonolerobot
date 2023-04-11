@@ -333,7 +333,7 @@ class Robot extends PIXI.Container {
 		vr = this.normalize(vr);
 		vl = this.normalize(vl);
 
-		console.log("vl : " + vl + " vr : "+ vr)
+		console.log(this.nn_parametres)
 		return [vr, vl];
 	}
 
