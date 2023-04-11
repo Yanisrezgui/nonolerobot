@@ -1,0 +1,108 @@
+nav {
+    display: flex;
+    margin-top: 30px;
+    margin-left: 15px;
+    margin-bottom: 50px;
+    h1 {
+        font-size: 32px;
+        width: 70%;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        li {
+            display: inline-block;
+            margin: 0 45px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 24px;
+            a {
+            color: #fff;
+            text-decoration: none;
+            &:hover {
+                color: #ccc;
+            }
+            }
+        }
+    }
+}
+
+.container-game {
+    display:flex;
+    max-height: 800px;
+    margin: 50px;
+    font-family: 'Roboto', sans-serif;
+
+
+    .controleurs {
+        margin: 50px auto;
+        color: $white;
+    }
+
+    h2 {
+        font-size: 24px;
+        display: flex;
+        justify-content: center;
+        border-bottom: 1px solid $white;
+        padding-bottom: 10px;
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: space-between;
+        margin: 15px 0 15px 0;
+        border-bottom: 1px solid $white;
+        padding-bottom: 15px;
+        
+        a {
+            cursor: pointer;
+        }
+    }
+
+    .container-vision {
+        h3 {
+            display: flex;
+            justify-content: center;
+            padding-bottom: 10px;
+        }
+        div {
+            text-align: center;
+
+            input {
+                padding: 5px
+            }
+
+            button {
+                padding: 5px;
+                margin: 5px;
+                background-color: $white;
+                color: $black;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+        }
+    }
+
+
+}
+
+
+.container-neuronnes {
+
+    h1 {
+        display: flex;
+        justify-content: center;
+        padding-bottom: 10px;
+    }
+
+    #myDiagramDiv{
+        margin: 0 auto;
+        width: 600px;
+        height: 400px;
+        background-color: white;
+    }
+}

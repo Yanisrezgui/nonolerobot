@@ -1,0 +1,149 @@
+@import url("https://fonts.cdnfonts.com/css/robot-9000");
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: #111111;
+}
+
+h1 {
+  font-family: "Robot 9000", sans-serif;
+  color: #F6F6F6;
+}
+
+.hook {
+  color: #343434;
+  margin: 0 5px 0 20px;
+}
+
+.slash {
+  color: #006452;
+  margin-right: 10px;
+}
+
+.accueil-container {
+  text-align: center;
+  color: white;
+  margin-top: 100px;
+}
+.accueil-container h1 {
+  font-size: 72px;
+}
+.accueil-container .subtitle {
+  font-family: "Roboto", sans-serif;
+  color: rgba(255, 255, 255, 0.44);
+  font-size: 18px;
+}
+
+.buttons-nav {
+  margin-top: 5%;
+}
+.buttons-nav a {
+  text-decoration: none;
+  color: #F6F6F6;
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  padding: 12px 24px;
+  background-color: #006452;
+  border-radius: 5px;
+  margin: 0 10px;
+  transition: all 0.3s ease-in-out;
+}
+.buttons-nav a:hover {
+  background-color: rgba(0, 100, 82, 0.26);
+}
+
+nav {
+  display: flex;
+  margin-top: 30px;
+  margin-left: 15px;
+  margin-bottom: 50px;
+}
+nav h1 {
+  font-size: 32px;
+  width: 70%;
+}
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+nav ul li {
+  display: inline-block;
+  margin: 0 45px;
+  font-family: "Roboto", sans-serif;
+  font-size: 24px;
+}
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+nav ul li a:hover {
+  color: #ccc;
+}
+
+.container-game {
+  display: flex;
+  max-height: 800px;
+  margin: 50px;
+  font-family: "Roboto", sans-serif;
+}
+.container-game .controleurs {
+  margin: 50px auto;
+  color: #F6F6F6;
+}
+.container-game h2 {
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid #F6F6F6;
+  padding-bottom: 10px;
+}
+.container-game .buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0 15px 0;
+  border-bottom: 1px solid #F6F6F6;
+  padding-bottom: 15px;
+}
+.container-game .buttons a {
+  cursor: pointer;
+}
+.container-game .container-vision h3 {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 10px;
+}
+.container-game .container-vision div {
+  text-align: center;
+}
+.container-game .container-vision div input {
+  padding: 5px;
+}
+.container-game .container-vision div button {
+  padding: 5px;
+  margin: 5px;
+  background-color: #F6F6F6;
+  color: #262626;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.container-neuronnes h1 {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 10px;
+}
+.container-neuronnes #myDiagramDiv {
+  margin: 0 auto;
+  width: 600px;
+  height: 400px;
+  background-color: white;
+}
+
+/*# sourceMappingURL=style1.css.map */
