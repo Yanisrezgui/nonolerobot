@@ -113,13 +113,15 @@ nav ul li a:hover {
 .container-game .buttons a {
   cursor: pointer;
 }
-.container-game .container-vision h2 {
+.container-game .container-vision h3 {
   display: flex;
   justify-content: center;
   padding-bottom: 10px;
 }
 .container-game .container-vision div {
   text-align: center;
+  border-bottom: 1px solid #F6F6F6;
+  padding: 10px;
 }
 .container-game .container-vision div input {
   padding: 5px;
@@ -133,7 +135,7 @@ nav ul li a:hover {
   border-radius: 5px;
   cursor: pointer;
 }
-.container-game .container-neuronnes h1 {
+.container-game .container-neuronnes h3 {
   display: flex;
   justify-content: center;
   padding-bottom: 10px;
