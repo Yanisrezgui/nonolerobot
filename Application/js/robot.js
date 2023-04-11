@@ -103,9 +103,7 @@ class Robot extends PIXI.Container {
 			let dist=Math.sqrt((obstacles[i].x-this.x)**2 +
 				(obstacles[i].y-this.y)**2);
 			if (dist<this.sensor_range && dist != 0 ){
-				hits.push([obstacles[i], dist]);
-				console.log(this.sensor_range);
-				
+				hits.push([obstacles[i], dist]);				
 			}
 		}
 
@@ -143,29 +141,30 @@ class Robot extends PIXI.Container {
 				//document.querySelector("#score").style.width = score * 0.01 * 30 + "px";
 				//document.querySelector("#score").style.visibility = "unset";
 
-			} else if (obj instanceof Obstacle &&
+			} 
+			//else if (obj instanceof Obstacle &&
 				
-				y <  (this.robot_h+obj.height)/2 &&
-				y > -(this.robot_h+obj.height)/2 
-				){
-				this.rotation += 0.1;
-				score ++;
+			// 	y <  (this.robot_h+obj.height)/2 &&
+			// 	y > -(this.robot_h+obj.height)/2 
+			// 	){
+			// 	this.rotation += 0.1;
+			// 	score ++;
 
-				//document.querySelector("#score").style.width = score * 0.01 * 30 + "px";
-				//document.querySelector("#score").style.visibility = "unset";
+			// 	//document.querySelector("#score").style.width = score * 0.01 * 30 + "px";
+			// 	//document.querySelector("#score").style.visibility = "unset";
 
-			} else if (obj instanceof Obstacle &&
-				x <  (this.robot_w+obj.width)/2 &&
-				x > -(this.robot_w+obj.width)/2 
+			// } else if (obj instanceof Obstacle &&
+			// 	x <  (this.robot_w+obj.width)/2 &&
+			// 	x > -(this.robot_w+obj.width)/2 
 			
-				){
-				this.rotation -= 0.1;
-				score ++;
+			// 	){
+			// 	this.rotation -= 0.1;
+			// 	score ++;
 
-				//document.querySelector("#score").style.width = score * 0.01 * 30 + "px";
-				//document.querySelector("#score").style.visibility = "unset";
+			// 	//document.querySelector("#score").style.width = score * 0.01 * 30 + "px";
+			// 	//document.querySelector("#score").style.visibility = "unset";
 
-			}
+			// }
 			
 			else {
 
@@ -299,7 +298,13 @@ class Robot extends PIXI.Container {
 		//console.log(param)
 	}
 
+	sigmoid(x) {
+		return 1 / (1 + Math.exp(-x));
+	}
 
+	normalize(value) {
+		return (value - 0.5) * 2;
+	  }
 
 	/**
 	 * controller with neural network
@@ -310,19 +315,25 @@ class Robot extends PIXI.Container {
 		let vr;
 		let vl;
 
-		vl = Math.tanh(bias_value +
+		// console.log(sensors[0])
+		// console.log(this.nn_parametres[0])
+
+		vl = this.sigmoid(bias_value +
 			sensors[0] * this.nn_parametres[0] +
 			sensors[1] * this.nn_parametres[2] +
 			sensors[2] * this.nn_parametres[4] +
-			sensors[3] * this.nn_parametres[6] );
-
-		vr = Math.tanh(bias_value +
+			sensors[3] * this.nn_parametres[6]);
+		
+		 vr = this.sigmoid(bias_value +
 			sensors[0] * this.nn_parametres[1] +
 			sensors[1] * this.nn_parametres[3] +
 			sensors[2] * this.nn_parametres[5] +
-			sensors[3] * this.nn_parametres[7] );
+			sensors[3] * this.nn_parametres[7]);
+	
+		vr = this.normalize(vr);
+		vl = this.normalize(vl);
 
-
+		console.log("vl : " + vl + " vr : "+ vr)
 		return [vr, vl];
 	}
 

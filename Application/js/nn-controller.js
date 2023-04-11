@@ -13,8 +13,8 @@ let myDiagram = objGo(go.Diagram, "myDiagramDiv",
 
 myDiagram.layout = objGo(go.LayeredDigraphLayout,{ 
     direction: 0,
-    layerSpacing: 150,
-    columnSpacing: 0,
+    layerSpacing: 250,
+    columnSpacing: 40,
     layeringOption: go.LayeredDigraphLayout.LayerLongestPathSink
 });
 

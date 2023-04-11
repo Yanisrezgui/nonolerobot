@@ -11,7 +11,7 @@ function demo_init(){
     // Create a Pixi Application
     
     app = new PIXI.Application({
-	width: window.innerWidth * 2 /3,      	// default: 800
+	width: window.innerWidth * 2 /4,      	// default: 800
 	height: window.innerHeight, 			// default: 600
 	antialias: true,    					// default: false
 	transparent: false, 					// default: false
@@ -165,9 +165,8 @@ function init_events() {
 		
 	})
 
-	document.querySelector("#update").addEventListener("click", ()=>{
+	document.getElementById("update").addEventListener("click", ()=>{
 		nono.set_nn_parameter(get_nn_parameter());
-				
 	})
 
 	document.querySelector("#apply").addEventListener('click', ()=>{
