@@ -168,9 +168,8 @@ function init_events() {
 	document.getElementById("update").addEventListener("click", () => {
 		nono.set_nn_parameter(get_nn_parameter());
 		app.stage.removeChild(nono);
-		nono = new Robot(100, 100, 0, nono.reset_sensor());
+		nono = new Robot(nono.getCoord()[0], nono.getCoord()[1], nono.getCoord()[2], nono.reset_sensor());
 		app.stage.addChild(nono);
-		nono.reset();
 	})
 
 }

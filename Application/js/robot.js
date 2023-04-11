@@ -93,6 +93,13 @@ class Robot extends PIXI.Container {
 		this.addChild(this.sprite);
     }
 
+	getCoord() {
+		let x = this.x
+		let y = this.y
+		let r = this.rotation
+		return [x, y, r]
+	}
+
     read_sensors(){
 
 		const hits = [];
