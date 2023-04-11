@@ -1,4 +1,5 @@
 @import url("https://fonts.cdnfonts.com/css/robot-9000");
+
 * {
   padding: 0;
   margin: 0;
@@ -28,9 +29,11 @@ h1 {
   color: white;
   margin-top: 100px;
 }
+
 .accueil-container h1 {
   font-size: 72px;
 }
+
 .accueil-container .subtitle {
   font-family: "Roboto", sans-serif;
   color: rgba(255, 255, 255, 0.44);
@@ -40,6 +43,7 @@ h1 {
 .buttons-nav {
   margin-top: 5%;
 }
+
 .buttons-nav a {
   text-decoration: none;
   color: #F6F6F6;
@@ -51,6 +55,7 @@ h1 {
   margin: 0 10px;
   transition: all 0.3s ease-in-out;
 }
+
 .buttons-nav a:hover {
   background-color: rgba(0, 100, 82, 0.26);
 }
@@ -61,10 +66,12 @@ nav {
   margin-left: 15px;
   margin-bottom: 50px;
 }
+
 nav h1 {
   font-size: 32px;
   width: 70%;
 }
+
 nav ul {
   list-style: none;
   padding: 0;
@@ -72,16 +79,19 @@ nav ul {
   display: flex;
   align-items: center;
 }
+
 nav ul li {
   display: inline-block;
   margin: 0 45px;
   font-family: "Roboto", sans-serif;
   font-size: 24px;
 }
+
 nav ul li a {
   color: #fff;
   text-decoration: none;
 }
+
 nav ul li a:hover {
   color: #ccc;
 }
@@ -92,10 +102,12 @@ nav ul li a:hover {
   margin: 50px;
   font-family: "Roboto", sans-serif;
 }
+
 .container-game .controleurs {
   margin: 50px auto;
   color: #F6F6F6;
 }
+
 .container-game h2 {
   font-size: 24px;
   display: flex;
@@ -103,6 +115,7 @@ nav ul li a:hover {
   border-bottom: 1px solid #F6F6F6;
   padding-bottom: 10px;
 }
+
 .container-game .buttons {
   display: flex;
   justify-content: space-between;
@@ -110,20 +123,25 @@ nav ul li a:hover {
   border-bottom: 1px solid #F6F6F6;
   padding-bottom: 15px;
 }
+
 .container-game .buttons a {
   cursor: pointer;
 }
+
 .container-game .container-vision h2 {
   display: flex;
   justify-content: center;
   padding-bottom: 10px;
 }
+
 .container-game .container-vision div {
   text-align: center;
 }
+
 .container-game .container-vision div input {
   padding: 5px;
 }
+
 .container-game .container-vision div button {
   padding: 5px;
   margin: 5px;
@@ -133,16 +151,30 @@ nav ul li a:hover {
   border-radius: 5px;
   cursor: pointer;
 }
+
 .container-game .container-neuronnes h1 {
   display: flex;
   justify-content: center;
   padding-bottom: 10px;
 }
+
 .container-game .container-neuronnes #myDiagramDiv {
   margin: 0 auto;
   width: 600px;
   height: 400px;
   background-color: white;
 }
+
+#myProgress {
+  width: 100%;
+  background-color: red;
+}
+
+#myBar {
+  width: 100%;
+  height: 30px;
+  background-color: #04AA6D;
+}
+
 
 /*# sourceMappingURL=style1.css.map */
