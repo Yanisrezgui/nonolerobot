@@ -32,7 +32,7 @@ nav {
 
 .container-game {
     display:flex;
-    max-height: 800px;
+
     margin: 50px;
     font-family: 'Roboto', sans-serif;
 
@@ -102,6 +102,10 @@ nav {
             width: 600px;
             height: 400px;
             background-color: white;
+        }
+
+        p {
+            text-align: center;
         }
 
 

@@ -88,7 +88,6 @@ nav ul li a:hover {
 
 .container-game {
   display: flex;
-  max-height: 800px;
   margin: 50px;
   font-family: "Roboto", sans-serif;
 }
@@ -145,6 +144,9 @@ nav ul li a:hover {
   width: 600px;
   height: 400px;
   background-color: white;
+}
+.container-game .container-neuronnes p {
+  text-align: center;
 }
 .container-game #myBar {
   background-color: green;

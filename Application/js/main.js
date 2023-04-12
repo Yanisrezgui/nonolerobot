@@ -12,7 +12,7 @@ function demo_init() {
 
 	app = new PIXI.Application({
 		width: window.innerWidth * 2 / 4,      	// default: 800
-		height: window.innerHeight, 			// default: 600
+		height: window.innerHeight * 3 / 4, 			// default: 600
 		antialias: true,    					// default: false
 		transparent: false, 					// default: false
 		resolution: 1,      					// default: 1
@@ -113,9 +113,9 @@ function demo_start() {
 }
 
 function init_events() {
+	document.getElementById("nn-neuronnes").innerHTML = get_nn_parameter();
 	let start = document.querySelector("#start");
 	start.onclick = function () {
-		//console.log(paused);
 		if (!paused) {
 			nono.set_nn_parameter(get_nn_parameter())
 			//app.ticker.start();
@@ -125,6 +125,7 @@ function init_events() {
 			start.classList.add('bi-play-circle');
 
 		} else {
+			nono.set_nn_parameter(get_nn_parameter())
 			//app.ticker.stop();
 			//change icon of button
 			start.classList.remove("bi-play-circle");
@@ -166,10 +167,11 @@ function init_events() {
 	})
 
 	document.getElementById("update").addEventListener("click", () => {
-		nono.set_nn_parameter(get_nn_parameter());
 		app.stage.removeChild(nono);
 		nono = new Robot(nono.getCoord()[0], nono.getCoord()[1], nono.getCoord()[2], nono.reset_sensor());
 		app.stage.addChild(nono);
+		nono.set_nn_parameter(get_nn_parameter());
+		document.getElementById("nn-neuronnes").innerHTML = get_nn_parameter();
 	})
 
 }
