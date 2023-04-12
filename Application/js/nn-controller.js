@@ -26,7 +26,7 @@ var patternBrush = $(go.Brush, "white");
 
 myModel.nodeDataArray = [
     { key: "Food Sensor Left" },
-    { key: "Food Sensor Right" },
+    { key: "Food Sensor Right"},
     { key: "Obstacle Sensor Left" },
     { key: "Obstacle Sensor Right" },
     { key: "Left Motor" },

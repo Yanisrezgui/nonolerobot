@@ -163,4 +163,37 @@ nav ul li a:hover {
   padding-top: 10px;
 }
 
+.sliding {
+  background: #fff;
+  overflow: hidden;
+  color: #F6F6F6;
+  font-family: "Roboto", sans-serif;
+  margin: 12px 25% 12px 25%;
+  transition: all 0.5s ease-in-out;
+  height: 0;
+  background-color: rgb(41, 41, 41);
+}
+
+.sliding p {
+  padding: 15px 15px;
+}
+
+.sliding:target {
+  height: 125px;
+}
+
+.nono-title {
+  text-decoration: none;
+  color: #F6F6F6;
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  padding: 12px 24px;
+  background-color: #006452;
+  border-radius: 5px;
+}
+
+.info-container .subtitle {
+  margin-bottom: 25px;
+}
+
 /*# sourceMappingURL=style1.css.map */

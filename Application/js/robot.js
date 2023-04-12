@@ -335,20 +335,22 @@ class Robot extends PIXI.Container {
 		// console.log(sensors[0])
 		// console.log(this.nn_parametres[0])
 
-		vl = this.sigmoid(bias_value +
+		vl = Math.tanh(bias_value +
 			sensors[0] * this.nn_parametres[0] +
 			sensors[1] * this.nn_parametres[2] +
 			sensors[2] * this.nn_parametres[4] +
 			sensors[3] * this.nn_parametres[6]);
 
-		vr = this.sigmoid(bias_value +
+		vr = Math.tanh(bias_value +
 			sensors[0] * this.nn_parametres[1] +
 			sensors[1] * this.nn_parametres[3] +
 			sensors[2] * this.nn_parametres[5] +
 			sensors[3] * this.nn_parametres[7]);
 
+
 		vr = this.normalize(vr);
 		vl = this.normalize(vl);
+		console.log(vl, vr)
 
 		console.log(this.nn_parametres)
 		return [vr, vl];

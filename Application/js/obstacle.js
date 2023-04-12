@@ -32,7 +32,7 @@ class Obstacle extends PIXI.Sprite {
       
 		this.x = Math.random() * app.renderer.width;
 		this.y = Math.random() * app.renderer.height;
-		this.rotation = Math.random() * Math.PI * 2 ;
+		this.rotation = 0 ;
   
 	  }
 
