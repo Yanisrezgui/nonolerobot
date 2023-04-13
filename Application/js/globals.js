@@ -22,9 +22,13 @@ let nono = null;
 
 let elapsed = 0.0;
 let tics    = 0;
-let timeDuration = [];
 let cherriesScore = 0;
 let battery   = 100;
+
+let statistics = {
+    cherries: [],
+    obstacles: []
+};
 
 const debug = false; // fix the number of cherries to 1
 

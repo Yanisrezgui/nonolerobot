@@ -161,7 +161,7 @@ function init_events() {
 		elapsed = 0;
 		tics = 0;
 		paused = false;
-		timeDuration = [];
+		cherriesScore = 0;
 
 	})
 
@@ -190,10 +190,13 @@ function game_loop(delta) {
 		//document.querySelector("#battery").style.width = rate * 400 + "px"
 		//document.querySelector("#pointer").style.left =  rate * 400 + "px"
 
+		// statistics update each 10 secondes
 		if ((tics / 180) >= 5) {
+			statistics.cherries.push(cherriesScore);
+			localStorage.setItem('statistics', JSON.stringify(statistics));
+
 			tics = 0;
-			let score = num_cherries - cherriesScore;
-			timeDuration.push(score);
+			cherriesScore = 0;
 		}
 
 		// robot sens/ act loop

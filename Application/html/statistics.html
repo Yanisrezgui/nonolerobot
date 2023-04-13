@@ -21,42 +21,35 @@
         <li><a href="./accueil.html">Exit</a></li>
       </ul>
     </nav>
+    <button class="reset-btn" id="reset">Réinitialiser les stats</button>
     <div id="statistics">
       <canvas id="myChart"></canvas>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../js/globals.js"></script>
-
-    <script>
-      let lineChartData = {
-        labels: ["0:00", "0:15", "0:30", "0:45", "1:00", "1:15", "1:30", "1:45", "2:00", "3:00", "3:15", "3:30", "3:45", "4:00", "4:15", "4:30", "4:45", "5:00"],
-        datasets: []
-      }
-
-      timeDuration.forEach(function (a, i) {
-        console.log(a)
-        
-        lineChartData.datasets.push({
-          data: JSON.parse(a)
-        });
-      });
-
-      const ctx = document.getElementById("myChart");
-      new Chart(ctx, {
-        type: "line",
-        data: {
-          labels: lineChartData.labels,
-          datasets: lineChartData.datasets
-        },
-        options: {
-          scales: {
-            y: {
-              suggestedMin: 0,
-              suggestedMax: num_cherries + 15,
-            },
-          },
-        },
-      });
-    </script>
+    <script src="../js/stats.js"></script>
   </body>
+
+  <style>
+  .reset-btn {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+  }
+  
+  .reset-btn:hover {
+    background-color: #3e8e41;
+  }
+  
+  .reset-btn:active {
+    background-color: #235f23;
+  }
+</style>
 </html>

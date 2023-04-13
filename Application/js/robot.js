@@ -68,7 +68,6 @@ class Robot extends PIXI.Container {
 		this.rotation = r;
 		this.param_go = get_nn_parameter();
 		this.sensor_range = s;
-		this.cherriesScore = 0;
 
 		// The sensors
 
@@ -136,7 +135,7 @@ class Robot extends PIXI.Container {
 
 				// eat
 				obj.relocate();
-				this.cherriesScore ++;
+				cherriesScore ++;
 			} else {
 
 				// get readings and update
